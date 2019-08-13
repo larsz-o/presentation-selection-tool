@@ -1,5 +1,98 @@
+button {
+  padding: 10px; 
+  border-radius: 6px;
+  background-color: #0A2342;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.cancel {
+  background-color: white;
+  color: #FB3640;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content:center;
+}
+.dialog-form {
+  padding: 20px; 
+}
+.flex-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 5vh;
+}
+h1 {
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+h2 {
+  font-weight: 200;
+  margin-top: 0;
+}
+.header {
+  background-color: #F5F5F5;
+  padding: 10px;
+  color: #775253;
+  padding-bottom: 10vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+.highlight {
+  background-color: #FFCF35;
+}
+input {
+  border: 0;
+  border-bottom: 1px solid gray;
+  padding: 10px;
+  display: block;
+  width: 70%;
+  font-size: 1.5em;
+}
+input:focus {
+  outline: none;
+  text-decoration: none;
+}
+label {
+  margin: 5px;
+}
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
 main {
   box-sizing: border-box;
-  margin: 10vh;
   font-family: 'Catamaran', sans-serif;
+  color: #333333;
+  word-wrap: break-word;
+  hyphens: auto;
 }
+table {
+  border-collapse: collapse;
+  width: 90% !important;
+  table-layout: fixed;
+}
+td {
+  padding: 20px;
+  height: 100%;
+  vertical-align: middle;
+  border-bottom: 1px solid lightgray;
+}
+thead {
+  margin-top: 0;
+  text-transform: uppercase; 
+  font-weight: 500;
+  background-color: #BFC3BA
+
+}
+
