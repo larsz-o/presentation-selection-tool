@@ -1,3 +1,3 @@
-# Signalling Pathway Project Scheduler
+# Presentation Topic Chooser
 
-A little tool to help students in a bioinformatics class choose which topic they'll present on. 
+A little tool to help students choose which topic they'll present on. 
