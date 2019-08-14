@@ -6,7 +6,7 @@ class Header extends Component {
             <div>
                 <div className="logo">
                     <img src={require('../StudentView/logo.png')} alt="Brandeis logo" width="100%" />
-                   {this.props.term.length > 0 && <h2>RBIF 102: {this.props.term[0].term} {this.props.term[0].year}</h2>} 
+                   {this.props.term.length > 0 && <h2>RBIF 102: {this.props.term[0].semester} {this.props.term[0].year}</h2>} 
                 </div>
             </div>
 
