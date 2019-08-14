@@ -3,8 +3,6 @@ import Header from '../Header/Header';
 import axios from 'axios'; 
 import { Dialog, DialogTitle, Select, MenuItem, Input} from '@material-ui/core';
 
-// to do: add new signal 
-
 class InstructorView extends Component {
     constructor(props){
         super(props);
@@ -14,13 +12,16 @@ class InstructorView extends Component {
             editingSignal: '',
             term: '',
             year: 0, 
-            activeTerm: []
+            activeTerm: [],
+            newDialog: false,
+            newSignal: ''
         }
     }
     closeDialogue = () => {
         this.setState({
           ...this.state,
-          open: false
+          open: false, 
+          newDialog: false
         })
       }
     componentDidMount = () => {
@@ -99,6 +100,17 @@ class InstructorView extends Component {
           editingSignal: signal
         });
       }
+      postSignal = () => {
+          axios({
+              method: 'POST',
+              url: 'api/signal',
+              data: {signal: this.state.newSignal, claimed: false}
+          }).then(() => {
+              this.getLatestSignals();
+          }).catch((error) => {
+              console.log('Error posting signal', error);
+          })
+      }
       saveTerm = () => {
           let year = parseInt(this.state.year);
           axios({
@@ -138,8 +150,8 @@ class InstructorView extends Component {
         <label>Year:</label><Input onChange={(event)=>this.handleTermChange(event, 'year')}/>
         <button onClick={()=>this.saveTerm()}>Save</button>
                 </div>
-               <button onClick={()=>this.openNewDialogue()}>Add new signal</button>
-           <div class="container">
+               <div className="center"><button onClick={()=>this.openNewDialogue()}>Add new signal</button></div>
+           <div className="container">
                <table>
                    <thead>
                        <tr>
@@ -165,6 +177,17 @@ class InstructorView extends Component {
             <label>Name: </label><input value={this.state.editingSignal.signal} onChange={(event) => this.handleChangeFor(event)} />
             <div className="flex-box">
               <button onClick={() => this.editSignal()}>Submit</button>
+              <button className="cancel" onClick={() => this.closeDialogue()}>Cancel</button>
+            </div>
+
+          </div>
+        </Dialog>
+        <Dialog open={this.state.newDialog}>
+          <div className="dialog-form">
+            <DialogTitle>Enter signal information</DialogTitle>
+            <label>Name: </label><input value={this.state.newSignal} onChange={(event) => this.handleTermChange(event, 'newSignal')} />
+            <div className="flex-box">
+              <button onClick={() => this.postSignal()}>Submit</button>
               <button className="cancel" onClick={() => this.closeDialogue()}>Cancel</button>
             </div>
 

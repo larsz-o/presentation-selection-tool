@@ -14,7 +14,8 @@ class StudentView extends Component {
       email: '', 
       index: '', 
       student: '',
-      activeTerm: []
+      activeTerm: [],
+      lock: false
     }
   }
   claimSignal = () => {
@@ -85,6 +86,10 @@ class StudentView extends Component {
       data: {signal: this.state.signalSelected.signal, student: this.state.student, email: this.state.email, claimed: true, id: this.state.signalSelected.id}
     }).then((response) => {
       this.getLatestSignals();
+      this.setState({
+        ...this.state, 
+        lock: true
+      })
     }).catch((error) => {
       alert('Something went wrong, please try again.')
       console.log('Error posting to server', error); 
@@ -92,46 +97,54 @@ class StudentView extends Component {
   }
   render() {
     return (
-      <main>
-        <Header term={this.state.activeTerm}/>
-        <div className="header">
-                    <h1>Signaling Pathway Presentations</h1>
-                </div>
-        <p className="lead center">Claim the signaling transduction pathway you'd like to present on. First come, first serve.</p>
-        <div className="container">
-        <table>
-          <thead>
-            <tr>
-              <td>Signal Transduction Pathway</td>
-              <td>Status</td>
-              <td>Claimed by</td>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.signals.map((signal, i) => {
-              return (
-                <tr key={i}><td>{signal.signal}</td> <td>{!signal.claimed ? (<button className="claim" onClick={() => this.openDialogue(signal.signal, i, signal.id)}>Claim</button>) : (<p>Already claimed</p>)}</td><td>{signal.student} <span> - </span>{signal.email}</td></tr>
-              )
-            })}
-          </tbody>
-
-        </table>
-        </div>
-        
-        <Dialog open={this.state.open}>
-          <div className="dialog-form">
-            <DialogTitle>Enter your information</DialogTitle>
-            <p>You are claiming: <b>{this.state.signalSelected.signal}</b></p>
-            <label>Name: </label><input onChange={(event) => this.handleChangeFor(event, 'student')} />
-            <label>Email: </label><input onChange={(event) => this.handleChangeFor(event, 'email')} />
-            <div className="flex-box">
-              <button onClick={() => this.claimSignal()}>Submit</button>
-              <button className="cancel" onClick={() => this.closeDialogue()}>Cancel</button>
-            </div>
-
+      <div>
+{!this.state.lock ? (<main>
+  <Header term={this.state.activeTerm}/>
+  <div className="header">
+              <h1>Signaling Pathway Presentations</h1>
           </div>
-        </Dialog>
-      </main>
+  <p className="lead center">Claim the signaling transduction pathway you'd like to present on. First come, first serve.</p>
+  <div className="container">
+  <table>
+    <thead>
+      <tr>
+        <td>Signal Transduction Pathway</td>
+        <td>Status</td>
+        <td>Claimed by</td>
+      </tr>
+    </thead>
+    <tbody>
+      {this.state.signals.map((signal, i) => {
+        return (
+          <tr key={i}><td>{signal.signal}</td> <td>{!signal.claimed ? (<button className="claim" onClick={() => this.openDialogue(signal.signal, i, signal.id)}>Claim</button>) : (<p>Already claimed</p>)}</td><td>{signal.student} <span> - </span>{signal.email}</td></tr>
+        )
+      })}
+    </tbody>
+
+  </table>
+  </div>
+  
+  <Dialog open={this.state.open}>
+    <div className="dialog-form">
+      <DialogTitle>Enter your information</DialogTitle>
+      <p>You are claiming: <b>{this.state.signalSelected.signal}</b></p>
+      <label>Name: </label><input onChange={(event) => this.handleChangeFor(event, 'student')} />
+      <label>Email: </label><input onChange={(event) => this.handleChangeFor(event, 'email')} />
+      <div className="flex-box">
+        <button onClick={() => this.claimSignal()}>Submit</button>
+        <button className="cancel" onClick={() => this.closeDialogue()}>Cancel</button>
+      </div>
+
+    </div>
+  </Dialog>
+</main>) : (<div className="confirmation">
+      <h3>Thank you for your selection</h3>
+      <p>Your presentation will be on: {this.state.signalSelected.signal}</p>
+      <p>Please close this window.</p>
+</div>)}
+   
+      
+      </div>
     );
   }
 }
