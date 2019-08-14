@@ -13,6 +13,7 @@ class StudentView extends Component {
       name: '',
       email: '', 
       index: '', 
+      activeTerm: []
     }
   }
   claimSignal = () => {
@@ -36,6 +37,20 @@ class StudentView extends Component {
   componentDidMount = () => {
     this.getLatestSignals();
   }
+  getActiveTerm = () => {
+    axios({
+        method: 'GET',
+        url: 'api/term',
+    }).then((response) => {
+        console.log('success');
+        this.setState({
+            ...this.state,
+            activeTerm: response.data
+        })
+    }).catch((error) => {
+        console.log('error getting term', error)
+    })
+}
   getLatestSignals = () => {
     axios({
       method: 'GET', 
@@ -78,7 +93,7 @@ class StudentView extends Component {
   render() {
     return (
       <main>
-        <Header/>
+        <Header term={this.state.activeTerm}/>
         <div className="header">
                     <h1>Signaling Pathway Presentations</h1>
                 </div>

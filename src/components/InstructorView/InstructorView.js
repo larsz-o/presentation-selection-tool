@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header';
 import axios from 'axios'; 
-import { Dialog, DialogTitle } from '@material-ui/core';
+import { Dialog, DialogTitle, Select, MenuItem, Input} from '@material-ui/core';
 
 class InstructorView extends Component {
     constructor(props){
@@ -9,7 +9,10 @@ class InstructorView extends Component {
         this.state = {
             signals: [],
             open: false,
-            editingSignal: ''
+            editingSignal: '',
+            term: '',
+            year: 0, 
+            activeTerm: []
         }
     }
     closeDialogue = () => {
@@ -29,6 +32,7 @@ class InstructorView extends Component {
                 data: signal
             }).then(() =>{
                 this.getLatestSignals();
+                alert(`${signal.signal} deleted!`)
             }).catch((error) => {
                 console.log('Error deleting', error);
             })
@@ -41,8 +45,23 @@ class InstructorView extends Component {
             data: this.state.editingSignal
         }).then(() =>{
             this.getLatestSignals();
+            alert('Edit successful');
         }).catch((error) => {
             console.log('Error updating', error);
+        })
+    }
+    getActiveTerm = () => {
+        axios({
+            method: 'GET',
+            url: 'api/term',
+        }).then((response) => {
+            console.log('success');
+            this.setState({
+                ...this.state,
+                activeTerm: response.data
+            })
+        }).catch((error) => {
+            console.log('error getting term', error)
         })
     }
     getLatestSignals = () => {
@@ -64,6 +83,12 @@ class InstructorView extends Component {
               editingSignal: {...this.state.editingSignal, signal: event.target.value}
           })
       }
+      handleTermChange = (event, property) => {
+        this.setState({
+            ...this.state,
+            [property]: event.target.value
+        })
+    }
       openDialogue = (signal) => {
         this.setState({
           ...this.state,
@@ -71,15 +96,39 @@ class InstructorView extends Component {
           editingSignal: signal
         });
       }
+      saveTerm = () => {
+          let year = parseInt(this.state.year);
+          axios({
+              method: 'POST',
+              url: 'api/term',
+              data: {term: this.state.term, year: year}
+          }).then(() => {
+              console.log('success');
+              this.getActiveTerm();
+          }).catch((error) => {
+            console.log('error posting term', error);
+          })
+      }
     render(){
         return(
             <main>
-                <Header/>
+                <Header term={this.state.activeTerm}/>
                 <div className="header">
                     <h1>Edit Signal Pathways</h1>
                 </div>
                 <div className="term-select">
                 <label>Term:</label>
+                <Select
+          value={this.state.term}
+          onChange={(event)=>this.handleTermChange(event, 'term')}
+        >
+          <MenuItem value={'Fall-1'}>Fall-1</MenuItem>
+          <MenuItem value={'Fall-2'}>Fall-2</MenuItem>
+          <MenuItem value={'Spring-1'}>Spring-1</MenuItem>
+          <MenuItem value={'Spring-2'}>Spring-2</MenuItem>
+        </Select>
+        <label>Year:</label><Input onChange={(event)=>this.handleTermChange(event, 'year')}/>
+        <button onClick={()=>this.saveTerm()}>Save</button>
                 </div>
                
            <div class="container">
@@ -105,7 +154,7 @@ class InstructorView extends Component {
            <Dialog open={this.state.open}>
           <div className="dialog-form">
             <DialogTitle>Enter signal information</DialogTitle>
-            <label>Name: </label><input onChange={(event) => this.handleChangeFor(event)} />
+            <label>Name: </label><input value={this.state.editingSignal.signal} onChange={(event) => this.handleChangeFor(event)} />
             <div className="flex-box">
               <button onClick={() => this.editSignal()}>Submit</button>
               <button className="cancel" onClick={() => this.closeDialogue()}>Cancel</button>

@@ -6,6 +6,9 @@ button {
   text-transform: uppercase;
   font-weight: 600;
 }
+button:focus{
+  outline: none;
+}
 .cancel {
   background-color: white;
   color: #FB3640;
@@ -92,7 +95,6 @@ main {
   hyphens: auto;
   background-color: #F5F5F5;
   height: 100%;
-
 }
 table {
   border-collapse: collapse;
