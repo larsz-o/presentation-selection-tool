@@ -26,6 +26,7 @@ button:focus{
   margin-top: 25vh;
   height: 50vh;
   text-align: center;
+  font-size: 1.2em;
 }
 .confirmation > div {
   padding: 10px;
