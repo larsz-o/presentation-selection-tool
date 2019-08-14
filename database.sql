@@ -3,7 +3,7 @@ CREATE TABLE signals (
     "signal" varchar (100),
     "student" varchar (100),
     "email" varchar (60),
-    "claimed" boolean,
+    "claimed" boolean
 );
 
 CREATE TABLE term (
