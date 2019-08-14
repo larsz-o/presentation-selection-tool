@@ -32,7 +32,7 @@ router.put('/claim', (req, res) => {
             let query = `SELECT * FROM "signals" WHERE "id" = $1;`;
             let result = await client.query(query, [claim.id]);
             console.log('result=' + result)
-            if(result[0].claimed){
+            if(result.claimed){
                 console.log('Already claimed');
                 await client.query('COMMIT');
                 res.sendStatus(403);
