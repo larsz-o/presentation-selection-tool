@@ -100,6 +100,12 @@ class InstructorView extends Component {
           editingSignal: signal
         });
       }
+      openNewDialogue = () => {
+        this.setState({
+          ...this.state,
+          newDialog: true,
+        });
+      }
       postSignal = () => {
           axios({
               method: 'POST',
