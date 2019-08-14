@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Dialog, DialogTitle } from '@material-ui/core';
 import axios from 'axios';
+import Header from '../Header/Header';
 
 class StudentView extends Component {
   constructor(props) {
@@ -12,7 +13,6 @@ class StudentView extends Component {
       name: '',
       email: '', 
       index: '', 
-      term: ''
     }
   }
   claimSignal = () => {
@@ -78,15 +78,7 @@ class StudentView extends Component {
   render() {
     return (
       <main>
-        <div className="logo">
-        <img src={require('./logo.png')} alt="Brandeis logo" width="100%"/>
-            <h2>RBIF 102: {this.state.term}</h2>
-        </div>
-            
-        <div class="header">
-            <h1>Signaling Pathway Presentations</h1>
-        </div>
-        <p className="lead center">Claim the signaling transduction pathway you'd like to present on. First come, first serve.</p>
+        <Header/>
         <div className="container">
         <table>
           <thead>

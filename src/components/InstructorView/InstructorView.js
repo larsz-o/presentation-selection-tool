@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../Header/Header';
 
 class InstructorView extends Component {
     constructor(props){
@@ -26,7 +27,9 @@ class InstructorView extends Component {
     render(){
         return(
             <main>
-
+                <Header/>
+                <h2>Edit Signal Pathways</h2>
+            
             </main>
         );
     }
