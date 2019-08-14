@@ -39,7 +39,7 @@ class StudentView extends Component {
   getLatestSignals = () => {
     axios({
       method: 'GET', 
-      url: '/api/signals'
+      url: 'api/signals'
     }).then((response) => {
       this.setState({
         ...this.state,
@@ -66,7 +66,7 @@ class StudentView extends Component {
   postToServer = () => {
     axios({
       method: 'PUT', 
-      url: '/api/signals/claim',
+      url: 'api/signals/claim',
       data: {signal: this.state.signalSelected.signal, student: this.state.student, email: this.state.email, claimed: true, id: this.state.signalSelected.id}
     }).then((response) => {
       this.getLatestSignals();

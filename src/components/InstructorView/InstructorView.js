@@ -25,7 +25,7 @@ class InstructorView extends Component {
         if (window.confirm(`Are you sure you want to delete ${signal.signal}?`)) {
             axios({
                 method: 'DELETE',
-                url: '/api/signals',
+                url: 'api/signals',
                 data: signal
             }).then(() =>{
                 this.getLatestSignals();
@@ -37,7 +37,7 @@ class InstructorView extends Component {
     editSignal = () => {
         axios({
             method: 'PUT',
-            url: '/api/signals',
+            url: 'api/signals',
             data: this.state.editingSignal
         }).then(() =>{
             this.getLatestSignals();
@@ -48,7 +48,7 @@ class InstructorView extends Component {
     getLatestSignals = () => {
         axios({
           method: 'GET', 
-          url: '/api/signals'
+          url: 'api/signals'
         }).then((response) => {
           this.setState({
             ...this.state,
