@@ -23,6 +23,7 @@ class InstructorView extends Component {
       }
     componentDidMount = () => {
         this.getLatestSignals();
+        this.getActiveTerm();
     }
     deleteSignal = (signal) => {
         if (window.confirm(`Are you sure you want to delete ${signal.signal}?`)) {

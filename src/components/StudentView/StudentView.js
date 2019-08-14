@@ -36,6 +36,7 @@ class StudentView extends Component {
   }
   componentDidMount = () => {
     this.getLatestSignals();
+    this.getActiveTerm();
   }
   getActiveTerm = () => {
     axios({
