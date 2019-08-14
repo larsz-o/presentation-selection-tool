@@ -26,6 +26,7 @@ router.put('/', (req, res) => {
 router.put('/claim', (req, res) => {
     // if a signal is already claimed, don't let a user claim it. if it isn't, allow them to.
     const claim = req.body;
+    console.log('claim: ' + claim)
     (async () => {
         const client = await pool.connect();
         try {
@@ -37,6 +38,7 @@ router.put('/claim', (req, res) => {
                 res.sendStatus(403);
             } else {
                 query = `UPDATE "signals" SET "student" = $1, "email" = $2, "claimed" = $3 WHERE "id" = $4 AND "claimed" = false;`;
+                console.log('query ' + query)
                 await client.query(query, [claim.student, claim.email, claim.claimed, claim.id]);
                 await client.query('COMMIT');
                 res.sendStatus(201);
