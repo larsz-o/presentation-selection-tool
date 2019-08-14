@@ -7,9 +7,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const signalsRouter = require('./routes/signal_router');
-
+const termRouter = require('./routes/term_router');
 /* Routes */
 app.use('/api/signals', signalsRouter);
+app.user('/api/term', termRouter);
 
 // Serve static files
 app.use(express.static('build'));

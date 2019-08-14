@@ -108,6 +108,10 @@ td {
   vertical-align: middle;
   border-bottom: 1px solid lightgray;
 }
+.term-select {
+  text-align: center;
+  margin: 10px;
+}
 thead {
   margin-top: 0;
   text-transform: uppercase; 

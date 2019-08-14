@@ -105,6 +105,11 @@ class InstructorView extends Component {
           }).then(() => {
               console.log('success');
               this.getActiveTerm();
+              this.setState({
+                  ...this.state, 
+                  term: '',
+                  year: 0
+              })
           }).catch((error) => {
             console.log('error posting term', error);
           })
