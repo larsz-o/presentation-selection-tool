@@ -12,6 +12,12 @@ class InstructorView extends Component {
     componentDidMount = () => {
         this.getLatestSignals();
     }
+    deleteSignal = () => {
+
+    }
+    editSignal = () => {
+
+    }
     getLatestSignals = () => {
         axios({
           method: 'GET', 
@@ -29,7 +35,9 @@ class InstructorView extends Component {
         return(
             <main>
                 <Header/>
-                <h2>Edit Signal Pathways</h2>
+                <div className="header">
+                    <h1>Edit Signal Pathways</h1>
+                </div>
            <div class="container">
                <table>
                    <thead>
@@ -43,7 +51,7 @@ class InstructorView extends Component {
                           return(
                               <tr key={i}>
                                   <td>{signal.signal}</td>
-                                  <td><button>Edit</button><button>Delete</button></td>
+                                  <td><button onClick={()=>this.editSignal(signal)}>Edit</button><button onClick={()=>this.deleteSignal(signal)}>Delete</button></td>
                               </tr>
                           );
                       })}

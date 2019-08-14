@@ -79,6 +79,10 @@ class StudentView extends Component {
     return (
       <main>
         <Header/>
+        <div className="header">
+                    <h1>Signaling Pathway Presentations</h1>
+                </div>
+        <p className="lead center">Claim the signaling transduction pathway you'd like to present on. First come, first serve.</p>
         <div className="container">
         <table>
           <thead>
