@@ -49,6 +49,7 @@ class InstructorView extends Component {
             data: this.state.editingSignal
         }).then(() =>{
             this.getLatestSignals();
+            this.closeDialogue();
             alert('Edit successful');
         }).catch((error) => {
             console.log('Error updating', error);
@@ -112,6 +113,8 @@ class InstructorView extends Component {
               url: 'api/signals',
               data: {signal: this.state.newSignal, claimed: false}
           }).then(() => {
+             this.closeDialogue();
+             alert(`${this.state.newSignal} created`)
               this.getLatestSignals();
           }).catch((error) => {
               console.log('Error posting signal', error);
