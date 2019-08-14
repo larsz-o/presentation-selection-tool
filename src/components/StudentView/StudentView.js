@@ -18,9 +18,7 @@ class StudentView extends Component {
   }
   claimSignal = () => {
     let signals = this.state.signals.slice();
-    console.log(signals);
     signals[this.state.index] = {signal: this.state.signalSelected, student: this.state.name, email: this.state.email, claimed: true};
-    console.log(signals);
     this.setState({
       ...this.state, 
       open: false,

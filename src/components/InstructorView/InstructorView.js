@@ -109,7 +109,7 @@ class InstructorView extends Component {
               this.setState({
                   ...this.state, 
                   term: '',
-                  year: 0
+                  year: ''
               })
           }).catch((error) => {
             console.log('error posting term', error);
