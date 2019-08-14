@@ -23,6 +23,7 @@ button:focus{
 .confirmation {
   margin-left: 25vw;
   margin-right: 25vw;
+  margin-top: 25vh;
   height: 50vh;
   text-align: center;
 }

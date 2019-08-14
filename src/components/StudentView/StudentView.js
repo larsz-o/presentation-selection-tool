@@ -139,7 +139,7 @@ class StudentView extends Component {
   </Dialog>
 </main>) : (<main>
  <Paper className="confirmation">
-  <div>
+  <div className="breathing-room">
   <h3>Thank you for your selection</h3>
       <p>Your presentation will be on: {this.state.signalSelected.signal}</p>
       <p>Please note this for your records and then close this window.</p>
