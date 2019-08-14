@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dialog, DialogTitle } from '@material-ui/core';
+import { Dialog, DialogTitle, Paper} from '@material-ui/core';
 import axios from 'axios';
 import Header from '../Header/Header';
 
@@ -137,11 +137,11 @@ class StudentView extends Component {
 
     </div>
   </Dialog>
-</main>) : (<div className="confirmation">
+</main>) : (<Paper className="confirmation">
       <h3>Thank you for your selection</h3>
       <p>Your presentation will be on: {this.state.signalSelected.signal}</p>
       <p>Please close this window.</p>
-</div>)}
+</Paper>)}
    
       
       </div>
