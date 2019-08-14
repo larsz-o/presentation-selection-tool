@@ -109,7 +109,7 @@ class InstructorView extends Component {
       postSignal = () => {
           axios({
               method: 'POST',
-              url: 'api/signal',
+              url: 'api/signals',
               data: {signal: this.state.newSignal, claimed: false}
           }).then(() => {
               this.getLatestSignals();
@@ -156,7 +156,7 @@ class InstructorView extends Component {
         <label>Year:</label><Input onChange={(event)=>this.handleTermChange(event, 'year')}/>
         <button onClick={()=>this.saveTerm()}>Save</button>
                 </div>
-               <div className="center"><button onClick={()=>this.openNewDialogue()}>Add new signal</button></div>
+               <div className="center breathing-room"><button onClick={()=>this.openNewDialogue()}>Add new signal</button></div>
            <div className="container">
                <table>
                    <thead>

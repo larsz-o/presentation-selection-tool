@@ -26,6 +26,10 @@ button:focus{
   height: 50vh;
   text-align: center;
 }
+.confirmation > div {
+  padding: 10px;
+  margin: 10px; 
+}
 .container {
   display: flex;
   flex-direction: row;
