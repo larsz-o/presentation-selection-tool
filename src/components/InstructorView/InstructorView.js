@@ -29,7 +29,26 @@ class InstructorView extends Component {
             <main>
                 <Header/>
                 <h2>Edit Signal Pathways</h2>
-            
+           <div class="container">
+               <table>
+                   <thead>
+                       <tr>
+                           <td>Signal Pathway</td>
+                           <td>Actions</td>
+                       </tr>
+                   </thead>
+                   <tbody>
+                      {this.state.signals.map((signal, i) => {
+                          return(
+                              <tr key={i}>
+                                  <td>{signal.signal}</td>
+                                  <td><button>Edit</button><button>Delete</button></td>
+                              </tr>
+                          );
+                      })}
+                   </tbody>
+               </table>
+           </div>
             </main>
         );
     }
