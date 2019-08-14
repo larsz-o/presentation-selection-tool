@@ -13,6 +13,7 @@ class StudentView extends Component {
       name: '',
       email: '', 
       index: '', 
+      student: '',
       activeTerm: []
     }
   }
@@ -121,7 +122,7 @@ class StudentView extends Component {
           <div className="dialog-form">
             <DialogTitle>Enter your information</DialogTitle>
             <p>You are claiming: <b>{this.state.signalSelected.signal}</b></p>
-            <label>Name: </label><input onChange={(event) => this.handleChangeFor(event, 'name')} />
+            <label>Name: </label><input onChange={(event) => this.handleChangeFor(event, 'student')} />
             <label>Email: </label><input onChange={(event) => this.handleChangeFor(event, 'email')} />
             <div className="flex-box">
               <button onClick={() => this.claimSignal()}>Submit</button>
