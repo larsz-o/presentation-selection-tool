@@ -78,6 +78,10 @@ class InstructorView extends Component {
                 <div className="header">
                     <h1>Edit Signal Pathways</h1>
                 </div>
+                <div className="term-select">
+                <label>Term:</label>
+                </div>
+               
            <div class="container">
                <table>
                    <thead>
