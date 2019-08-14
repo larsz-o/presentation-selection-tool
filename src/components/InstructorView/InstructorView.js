@@ -3,6 +3,8 @@ import Header from '../Header/Header';
 import axios from 'axios'; 
 import { Dialog, DialogTitle, Select, MenuItem, Input} from '@material-ui/core';
 
+// to do: add new signal 
+
 class InstructorView extends Component {
     constructor(props){
         super(props);
@@ -136,7 +138,7 @@ class InstructorView extends Component {
         <label>Year:</label><Input onChange={(event)=>this.handleTermChange(event, 'year')}/>
         <button onClick={()=>this.saveTerm()}>Save</button>
                 </div>
-               
+               <button onClick={()=>this.openNewDialogue()}>Add new signal</button>
            <div class="container">
                <table>
                    <thead>
