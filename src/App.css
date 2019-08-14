@@ -10,6 +10,9 @@ button {
   background-color: white;
   color: #FB3640;
 }
+.center {
+  text-align: center;
+}
 .container {
   display: flex;
   flex-direction: row;
@@ -35,20 +38,15 @@ h2 {
   margin-top: 0;
 }
 .header {
-  background-color: #F5F5F5;
-  padding: 10px;
-  color: #775253;
   padding-bottom: 10vh;
   text-align: center;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  color: #0A2342;
+}
 
-}
-.highlight {
-  background-color: #FFCF35;
-}
 input {
   border: 0;
   border-bottom: 1px solid gray;
@@ -67,8 +65,24 @@ label {
 .lead {
   font-size: 1.25rem;
   font-weight: 300;
-  margin-bottom: 1rem;
-  margin-top: 0;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+@media only screen and (max-width: 600px) {
+  .logo {
+    width: 100vw;
+  }
+  .logo > img {
+    width: 250px;
+  }
+  .logo > h2 {
+    width: 80vw;
+  }
+}
+.logo {
+  width: 15vw;
+  margin: 5px;
+  padding: 3vw;
 }
 main {
   box-sizing: border-box;
@@ -76,11 +90,15 @@ main {
   color: #333333;
   word-wrap: break-word;
   hyphens: auto;
+  background-color: #F5F5F5;
+  height: 100vh;
+
 }
 table {
   border-collapse: collapse;
   width: 90% !important;
   table-layout: fixed;
+  background-color: white;
 }
 td {
   padding: 20px;
