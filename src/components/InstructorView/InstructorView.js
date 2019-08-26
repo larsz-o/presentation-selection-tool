@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Dialog, DialogTitle, Select, MenuItem, Input } from '@material-ui/core';
 import swal from 'sweetalert'; 
 
+let asc = true; 
 class InstructorView extends Component {
     constructor(props) {
         super(props);
@@ -187,16 +188,25 @@ class InstructorView extends Component {
         })
     }
     sortData = () => {
+        asc = !asc; 
         if(this.state.filtered.length === 0) {
             let topics = this.state.topics;
             topics.sort(function(a, b){
-                //descending 
+            
                 let keyA = a.topic;
                 let keyB = b.topic;
                 // Compare the 2 dates
-                if(keyA > keyB) return -1;
-                if(keyA < keyB) return 1;
-                return 0;
+                    //descending 
+                    if(asc === false){
+                        if(keyA > keyB) return -1;
+                        if(keyA < keyB) return 1;
+                        return 0;
+                    } else {
+                         //acscending 
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        return 0;
+                    }
             });
             this.setState({
                 ...this.state, 
@@ -208,10 +218,18 @@ class InstructorView extends Component {
                 //descending 
                 let keyA = a.topic;
                 let keyB = b.topic;
-                // Compare the 2 dates
-                if(keyA > keyB) return -1;
-                if(keyA < keyB) return 1;
-                return 0;
+                  // Compare the 2 dates
+                    //descending 
+                    if(asc === false){
+                        if(keyA > keyB) return -1;
+                        if(keyA < keyB) return 1;
+                        return 0;
+                    } else {
+                         //acscending 
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        return 0;
+                    }
             });
             this.setState({
                 ...this.state,
