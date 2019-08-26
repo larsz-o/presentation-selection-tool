@@ -187,12 +187,11 @@ class InstructorView extends Component {
             console.log('error posting term', error);
         })
     }
-    sortData = () => {
+    sortData = (key) => {
         asc = !asc; 
         if(this.state.filtered.length === 0) {
             let topics = this.state.topics;
             topics.sort(function(a, b){
-            
                 let keyA = a.topic;
                 let keyB = b.topic;
                 // Compare the 2 dates
@@ -278,7 +277,7 @@ class InstructorView extends Component {
                     <table>
                         <thead>
                             <tr>
-                                <td onClick={()=>this.sortData()}>Topic</td>
+                                <td onClick={()=>this.sortData()} className="cancel link">Topic</td>
                                 <td>Category</td>
                                 <td>Actions</td>
                             </tr>
