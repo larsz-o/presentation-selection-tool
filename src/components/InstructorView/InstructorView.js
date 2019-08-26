@@ -34,6 +34,11 @@ class InstructorView extends Component {
                 ...this.state,
                 filtered: filtered
             })
+        } else {
+            this.setState({
+                ...this.state, 
+                filtered: topics
+            })
         }
     }
     closeDialogue = () => {
