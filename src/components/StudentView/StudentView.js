@@ -111,7 +111,7 @@ class StudentView extends Component {
           <div className="header">
             {this.state.params === 'signals' && <h1>Signal Pathway Presentations</h1>} {this.state.params === 'clinical' && <h1>Clinical Trial Discussions</h1>}
           </div>
-          <p className="lead center">Claim the topic you'd like to present on. First come, first serve.</p>
+          <p className="lead center">Choose a topic below. Once you've claimed a topic, you are responsible for it. <b>Please only pick one.</b></p>
           <div className="container">
             <table>
               <thead>
