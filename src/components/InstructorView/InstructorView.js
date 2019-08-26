@@ -11,6 +11,7 @@ class InstructorView extends Component {
             topics: [],
             categories: [],
             activeTerm: [],
+            filtered: [],
             editingTopic: '',
             newTopic: '',
             activeTopic: '',
@@ -26,12 +27,14 @@ class InstructorView extends Component {
     }
     applyFilter = () => {
         let topics = this.state.topics; 
-        let filtered = topics.filter(topic => topic.category === this.state.filter); 
-        console.log(filtered);
-        this.setState({
-            ...this.state,
-            topics: filtered
-        })
+        if (this.state.filter !== ''){
+            let filtered = topics.filter(topic => topic.category === this.state.filter); 
+            console.log(filtered);
+            this.setState({
+                ...this.state,
+                filtered: filtered
+            })
+        }
     }
     closeDialogue = () => {
         this.setState({
@@ -221,7 +224,8 @@ class InstructorView extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.topics.map((topic, i) => {
+                            {/* if we aren't filtering, just map the state. */}
+                            {this.state.filtered.length === 0 ? (this.state.topics.map((topic, i) => {
                                 return (
                                     <tr key={i}>
                                         <td>{topic.topic}</td>
@@ -229,7 +233,15 @@ class InstructorView extends Component {
                                         <td><button onClick={() => this.openDialogue(topic)}>Edit</button><button onClick={() => this.deleteTopic(topic)}>Delete</button></td>
                                     </tr>
                                 );
-                            })}
+                            })) : (this.state.filtered.map((topic, i ) => {
+                                return (
+                                    <tr key={i}>
+                                    <td>{topic.topic}</td>
+                                    <td>{topic.category}</td>
+                                    <td><button onClick={() => this.openDialogue(topic)}>Edit</button><button onClick={() => this.deleteTopic(topic)}>Delete</button></td>
+                                </tr>
+                                );
+                            }))}
                         </tbody>
                     </table>
                 </div>
