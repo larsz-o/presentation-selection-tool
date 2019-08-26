@@ -80,12 +80,9 @@ class InstructorView extends Component {
         for (let i = 0; i < array.length; i++) {
             let test = array[i].category;
             if (categories.indexOf(test) == -1) {
-                console.log(test);
-                console.log(categories.indexOf(test));
                 categories.push(array[i].category)
             }
         }
-        console.log(categories);
         this.setState({
             ...this.state,
             categories: categories
@@ -188,7 +185,7 @@ class InstructorView extends Component {
                     <button onClick={() => this.saveTerm()}>Save</button>
                 </div>}
                 <div className="center breathing-room"><button onClick={() => this.openNewDialogue()}>Add new topic</button>
-                    {!this.state.termEdit && <p onClick={() => this.setState({ ...this.state, termEdit: true })} className="cancel">Edit term display dates</p>}</div>
+                    {!this.state.termEdit && <p onClick={() => this.setState({ ...this.state, termEdit: true })} className="cancel link">Edit term display dates</p>}</div>
                 <div className="container">
                     <table>
                         <thead>
@@ -212,15 +209,15 @@ class InstructorView extends Component {
                 <Dialog open={this.state.open}>
                     <div className="dialog-form">
                         <DialogTitle>Enter topic information</DialogTitle>
-                        <label>Name: </label><input value={this.state.editingTopic.topic} onChange={(event) => this.handleChangeFor(event)} />
-                        <label>Category: </label><select>
+                        <label>Topic: </label><input value={this.state.editingTopic.topic} onChange={(event) => this.handleChangeFor(event)} />
+                        <label>Category (i.e. what assignment is this for?): </label><select>
                             {this.state.categories.map((category, i) => {
                                 return (
                                     <option key={i} value={category}>{category}</option>
                                 );
                             })}
                         </select>
-                        {this.state.editCategory ? (<p className="cancel" onClick={() => this.toggleEdit()}>Category not listed?</p>): (<div><p>Create a new category: </p><input onChange={(event) => this.handleTermChange(event, 'category')} /></div>)}
+                        {this.state.editCategory ? (<p className="cancel link" onClick={() => this.toggleEdit()}>Category not listed?</p>): (<div><p>Create a new category: </p><input onChange={(event) => this.handleTermChange(event, 'category')} /></div>)}
                         <div className="flex-box">
                             <p className="cancel" onClick={() => this.closeDialogue()}>Cancel</p>
                             <button onClick={() => this.editTopic()}>Submit</button>
@@ -231,15 +228,15 @@ class InstructorView extends Component {
                 <Dialog open={this.state.newDialog}>
                     <div className="dialog-form">
                         <DialogTitle>Enter topic information</DialogTitle>
-                        <label>Name: </label><input value={this.state.newTopic} onChange={(event) => this.handleTermChange(event, 'newTopic')} />
-                        <label>Category: </label><select>
+                        <label>Topic: </label><input value={this.state.newTopic} onChange={(event) => this.handleTermChange(event, 'newTopic')} />
+                        <label>Category:</label><select>
                             {this.state.categories.map((category, i) => {
                                 return (
                                     <option key={i} value={category}>{category}</option>
                                 );
                             })}
                         </select>
-                        {this.state.editCategory ? (<p className="cancel" onClick={() => this.toggleEdit()}>Category not listed?</p>): (<div><p>Create a new category: </p><input onChange={(event) => this.handleTermChange(event, 'category')} /></div>) }
+                        {this.state.editCategory ? (<p className="cancel link" onClick={() => this.toggleEdit()}>Category not listed?</p>): (<div><p>Create a new category: </p><input onChange={(event) => this.handleTermChange(event, 'category')} /></div>) }
                         <div className="flex-box">
                             <p className="cancel" onClick={() => this.closeDialogue()}>Cancel</p>
                             <button onClick={() => this.postTopic()}>Submit</button>

@@ -45,7 +45,7 @@ button:focus{
   margin-bottom: 10vh;
 }
 .dialog-form {
-  padding: 20px; 
+  margin: 20px; 
 }
 .flex-box {
   display: flex;
@@ -84,6 +84,7 @@ input {
   display: block;
   width: 70%;
   font-size: 1.5em;
+  margin-bottom: 10px;
 }
 input:focus {
   outline: none;
@@ -91,6 +92,10 @@ input:focus {
 }
 label {
   margin: 5px;
+}
+.link {
+  color: rgb(84, 136, 184);
+
 }
 .lead {
   font-size: 1.25rem;
@@ -121,6 +126,9 @@ main {
   hyphens: auto;
   background-color: #F5F5F5;
   height: 100%;
+}
+select {
+  font-size: 1.1rem;
 }
 table {
   border-collapse: collapse;
