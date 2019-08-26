@@ -223,7 +223,7 @@ class InstructorView extends Component {
                         <label>Category: </label><select>
                             {this.state.categories.map((category, i) => {
                                 return(
-                                    <option key={i} value={cateogory}></option>
+                                    <option key={i} value={category}></option>
                                 );
                             })}
                         </select>
