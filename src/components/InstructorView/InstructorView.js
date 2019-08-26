@@ -210,7 +210,7 @@ class InstructorView extends Component {
                     </Select>
                     <label>Year:</label><Input onChange={(event) => this.handleTermChange(event, 'year')} />
                     <button className="save-button" onClick={() => this.saveTerm()}>Save</button>
-                    <span className="cancel" onClick={()=>this.setState({...this.state, termEdit: false})}>Cancel</span>
+                    <span className="cancel" onClick={()=>this.setState({...this.state, termEdit: false})}>cancel</span>
                 </div>}
                 <div className="center breathing-room"><button onClick={() => this.openNewDialogue()}>Add new topic</button>
                     {!this.state.termEdit && <p onClick={() => this.setState({ ...this.state, termEdit: true })} className="cancel link">Edit term display dates</p>}</div>
