@@ -146,22 +146,27 @@ class InstructorView extends Component {
         });
     }
     postTopic = () => {
-        axios({
-            method: 'POST',
-            url: 'api/topics',
-            data: { topic: this.state.newTopic, claimed: false, category: this.state.category }
-        }).then(() => {
-            this.closeDialogue();
-            swal('Success', 'The topic has been created!', 'success');
-            this.setState({
-                ...this.state,
-                newTopic: '',
-                category: ''
+        let regEx = /(a-z | _ )([^- / % & * # @ ) ( ! | $ , . ; : ~ ` + " ])/
+        if (regEx.test(this.state.category) && this.state.category.length < 64) {
+            axios({
+                method: 'POST',
+                url: 'api/topics',
+                data: { topic: this.state.newTopic, claimed: false, category: this.state.category }
+            }).then(() => {
+                this.closeDialogue();
+                swal('Success', 'The topic has been created!', 'success');
+                this.setState({
+                    ...this.state,
+                    newTopic: '',
+                    category: ''
+                })
+                this.getLatestData();
+            }).catch((error) => {
+                console.log('Error posting topic', error);
             })
-            this.getLatestData();
-        }).catch((error) => {
-            console.log('Error posting topic', error);
-        })
+        } else {
+            swal('Uh-oh', 'Your category name can only contain numbers, letters, and underscores and it must be less than 64 characters. Please try again.', 'error'); 
+        }
     }
     saveTerm = () => {
         let year = parseInt(this.state.year);
@@ -205,6 +210,7 @@ class InstructorView extends Component {
                     </Select>
                     <label>Year:</label><Input onChange={(event) => this.handleTermChange(event, 'year')} />
                     <button className="save-button" onClick={() => this.saveTerm()}>Save</button>
+                    <span className="cancel" onClick={()=>this.setState({...this.state, termEdit: false})}>Cancel</span>
                 </div>}
                 <div className="center breathing-room"><button onClick={() => this.openNewDialogue()}>Add new topic</button>
                     {!this.state.termEdit && <p onClick={() => this.setState({ ...this.state, termEdit: true })} className="cancel link">Edit term display dates</p>}</div>
