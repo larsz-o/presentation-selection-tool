@@ -26,13 +26,11 @@ class InstructorView extends Component {
     }
     applyFilter = () => {
         let topics = this.state.topics; 
-        if (this.state.filter !== ''){
-            topics.filter(topic => topic.category === this.state.filter); 
-        }
-        console.log(topics);
+        let filtered = topics.filter(topic => topic.category === this.state.filter); 
+        console.log(filtered);
         this.setState({
             ...this.state,
-            topics: topics
+            topics: filtered
         })
     }
     closeDialogue = () => {
@@ -198,7 +196,7 @@ class InstructorView extends Component {
                         <MenuItem value={'Spring-2'}>Spring-2</MenuItem>
                     </Select>
                     <label>Year:</label><Input onChange={(event) => this.handleTermChange(event, 'year')} />
-                    <button onClick={() => this.saveTerm()}>Save</button>
+                    <button className="save-button" onClick={() => this.saveTerm()}>Save</button>
                 </div>}
                 <div className="center breathing-room"><button onClick={() => this.openNewDialogue()}>Add new topic</button>
                     {!this.state.termEdit && <p onClick={() => this.setState({ ...this.state, termEdit: true })} className="cancel link">Edit term display dates</p>}</div>
