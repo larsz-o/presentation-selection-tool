@@ -7,24 +7,25 @@ class StudentView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      signals: [],
+      data: [],
       open: false,
-      signalSelected: '',
+      topicSelected: '',
       name: '',
       email: '', 
       index: '', 
       student: '',
       activeTerm: [],
-      lock: false
+      lock: false, 
+      params: ''
     }
   }
-  claimSignal = () => {
-    let signals = this.state.signals.slice();
-    signals[this.state.index] = {signal: this.state.signalSelected.signal, student: this.state.name, email: this.state.email, claimed: true};
+  claimTopic = () => {
+    let topics = this.state.data.slice();
+    topics[this.state.index] = {topic: this.state.topicSelected.topic, student: this.state.name, email: this.state.email, claimed: true};
     this.setState({
       ...this.state, 
       open: false,
-      signals: signals
+      data: topics
     });
     this.postToServer();
   }
@@ -35,7 +36,13 @@ class StudentView extends Component {
     })
   }
   componentDidMount = () => {
-    this.getLatestSignals();
+    const { match: { params } } = this.props;
+    let keyword = params.keyword; 
+    this.setState({
+      ...this.state,
+      params: keyword
+    })
+    this.getLatestData(keyword);
     this.getActiveTerm();
   }
   getActiveTerm = () => {
@@ -52,17 +59,17 @@ class StudentView extends Component {
         console.log('error getting term', error)
     })
 }
-  getLatestSignals = () => {
+  getLatestData = (keyword) => {
     axios({
       method: 'GET', 
-      url: 'api/signals'
+      url: `api/topics?name=${keyword}`
     }).then((response) => {
       this.setState({
         ...this.state,
-        signals: response.data
+        data: response.data
       });
     }).catch((error) => {
-      console.log('Error getting signals', error); 
+      console.log(`Error getting ${this.state.params}`, error); 
     })
   }
   handleChangeFor = (event, property) => {
@@ -71,21 +78,21 @@ class StudentView extends Component {
       [property]: event.target.value
     })
   }
-  openDialogue = (signal, i, id) => {
+  openDialogue = (topic, i, id) => {
     this.setState({
       ...this.state,
       open: true,
-      signalSelected: {signal: signal, id: id},
+      topicSelected: {topic: topic, id: id},
       index: i
     });
   }
   postToServer = () => {
     axios({
       method: 'PUT', 
-      url: 'api/signals/claim',
-      data: {signal: this.state.signalSelected.signal, student: this.state.student, email: this.state.email, claimed: true, id: this.state.signalSelected.id}
+      url: `api/topics/claim?name=${this.state.params}`,
+      data: {topic: this.state.topicSelected.topic, student: this.state.student, email: this.state.email, claimed: true, id: this.state.topicSelected.id}
     }).then((response) => {
-      this.getLatestSignals();
+      this.getLatestData(this.state.params);
       this.setState({
         ...this.state, 
         lock: true
@@ -101,22 +108,22 @@ class StudentView extends Component {
 {!this.state.lock ? (<main>
   <Header term={this.state.activeTerm}/>
   <div className="header">
-              <h1>Signaling Pathway Presentations</h1>
+            {this.state.params === 'signals' && <h1>Signal Pathway Presentations</h1>} {this.state.params === 'clinical' && <h1>Clinical Trial Discussions</h1>}
           </div>
-  <p className="lead center">Claim the signaling transduction pathway you'd like to present on. First come, first serve.</p>
+  <p className="lead center">Claim the topic you'd like to present on. First come, first serve.</p>
   <div className="container">
   <table>
     <thead>
       <tr>
-        <td>Signal Transduction Pathway</td>
+        {this.state.params === 'signals' && <td>Signal Transduction Pathway</td>}{this.state.params === 'clinical' && <td>Clinical Trials</td>}
         <td>Status</td>
         <td>Claimed by</td>
       </tr>
     </thead>
     <tbody>
-      {this.state.signals.map((signal, i) => {
+      {this.state.data.map((topic, i) => {
         return (
-          <tr key={i}><td>{signal.signal}</td> <td>{!signal.claimed ? (<button className="claim" onClick={() => this.openDialogue(signal.signal, i, signal.id)}>Claim</button>) : (<p>Already claimed</p>)}</td><td>{signal.student} <span> - </span>{signal.email}</td></tr>
+          <tr key={i}><td>{topic.topic}</td> <td>{!topic.claimed ? (<button className="claim" onClick={() => this.openDialogue(topic.topic, i, topic.id)}>Claim</button>) : (<p>Already claimed</p>)}</td><td>{topic.student} <span> - </span>{topic.email}</td></tr>
         )
       })}
     </tbody>
@@ -127,11 +134,11 @@ class StudentView extends Component {
   <Dialog open={this.state.open}>
     <div className="dialog-form">
       <DialogTitle>Enter your information</DialogTitle>
-      <p>You are claiming: <b>{this.state.signalSelected.signal}</b></p>
+      <p>You are claiming: <b>{this.state.topicSelected.signal}</b></p>
       <label>Name: </label><input onChange={(event) => this.handleChangeFor(event, 'student')} required/>
       <label>Email: </label><input onChange={(event) => this.handleChangeFor(event, 'email')} required/>
       <div className="flex-box">
-        <button onClick={() => this.claimSignal()}>Submit</button>
+        <button onClick={() => this.claimTopic()}>Submit</button>
         <button className="cancel" onClick={() => this.closeDialogue()}>Cancel</button>
       </div>
 
@@ -141,7 +148,7 @@ class StudentView extends Component {
  <Paper className="confirmation">
   <div className="breathing-room">
   <h3>Thank you for your selection</h3>
-      <p>Your presentation will be on: {this.state.signalSelected.signal}</p>
+      <p>Your presentation will be on: {this.state.topicSelected.topic}</p>
       <p>Please note this for your records and then close this window.</p>
   </div>
       

@@ -10,10 +10,10 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-        <Route exact path="/" component={StudentView}/>
+        <Route path="/select/:keyword" component={StudentView}/>
         <Route path="/admin" component={InstructorView}/>
+        <Route render={() => <h1>404: Page Not Found</h1>} />
         </Switch>
-     
       </Router>
     );
   }

@@ -21,9 +21,11 @@ if (process.env.DATABASE_URL) {
   };
 } else {
   config = {
-    host: 'localhost', // Server hosting the postgres database
+    host: process.env.DEV_HOST, // Server hosting the postgres database
     port: 5432, // env var: PGPORT
-    database: 'rbif_signals', // CHANGE THIS LINE! env var: PGDATABASE, this is likely the one thing you need to change to get up and running
+    database: process.env.DEV_DB, // CHANGE THIS LINE! env var: PGDATABASE, this is likely the one thing you need to change to get up and running
+    user: process.env.DEV_USER,
+    password: process.env.DEV_PASSWORD,
     max: 10, // max number of clients in the pool
     idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
   };
