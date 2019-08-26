@@ -135,6 +135,11 @@ class InstructorView extends Component {
         }).then(() => {
             this.closeDialogue();
             swal('Success', 'The topic has been created!', 'success');
+            this.setState({
+                ...this.state,
+                newTopic: '',
+                category: ''
+            })
             this.getLatestData();
         }).catch((error) => {
             console.log('Error posting topic', error);
