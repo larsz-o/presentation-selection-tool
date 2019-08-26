@@ -15,6 +15,7 @@ class InstructorView extends Component {
             newTopic: '',
             activeTopic: '',
             term: '',
+            filter: '',
             year: 0,
             category: '',
             termEdit: false,
@@ -167,6 +168,10 @@ class InstructorView extends Component {
         this.setState({ ...this.state, editCategory: false });
     }
     render() {
+        let topics = this.state.topics; 
+        if (this.state.filter !== ''){
+            topics.filter(topic => topic.category === this.state.filter); 
+        }
         return (
             <main>
                 <Header term={this.state.activeTerm} />
@@ -190,6 +195,17 @@ class InstructorView extends Component {
                 </div>}
                 <div className="center breathing-room"><button onClick={() => this.openNewDialogue()}>Add new topic</button>
                     {!this.state.termEdit && <p onClick={() => this.setState({ ...this.state, termEdit: true })} className="cancel link">Edit term display dates</p>}</div>
+                    {/* to do: filter results */}
+                    <div className="flex-box col-11">
+                        <label>Filter by topic: </label><select onChange={(event)=>this.handleTermChange(event, 'filter')} value={this.state.filter}>
+                        <option value="">---</option>
+                        {this.state.categories.map((category, i) => {
+                            return(
+                                <option value={category} key={i}>{category}</option>
+                            );
+                        })}
+                        </select>
+                    </div>
                 <div className="container">
                     <table>
                         <thead>
@@ -200,7 +216,7 @@ class InstructorView extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.topics.map((topic, i) => {
+                            {topics.map((topic, i) => {
                                 return (
                                     <tr key={i}>
                                         <td>{topic.topic}</td>
