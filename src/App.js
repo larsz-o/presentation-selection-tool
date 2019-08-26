@@ -14,6 +14,7 @@ class App extends Component {
         <Route path="/admin" component={InstructorView}/>
         <Route render={() => <h1>404: Page Not Found</h1>} />
         </Switch>
+
       </Router>
     );
   }

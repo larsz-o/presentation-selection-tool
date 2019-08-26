@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dialog, DialogTitle, Paper} from '@material-ui/core';
+import { Dialog, DialogTitle, Paper } from '@material-ui/core';
 import axios from 'axios';
 import Header from '../Header/Header';
 
@@ -11,19 +11,19 @@ class StudentView extends Component {
       open: false,
       topicSelected: '',
       name: '',
-      email: '', 
-      index: '', 
+      email: '',
+      index: '',
       student: '',
       activeTerm: [],
-      lock: false, 
+      lock: false,
       params: ''
     }
   }
   claimTopic = () => {
     let topics = this.state.data.slice();
-    topics[this.state.index] = {topic: this.state.topicSelected.topic, student: this.state.name, email: this.state.email, claimed: true};
+    topics[this.state.index] = { topic: this.state.topicSelected.topic, student: this.state.name, email: this.state.email, claimed: true };
     this.setState({
-      ...this.state, 
+      ...this.state,
       open: false,
       data: topics
     });
@@ -37,7 +37,7 @@ class StudentView extends Component {
   }
   componentDidMount = () => {
     const { match: { params } } = this.props;
-    let keyword = params.keyword; 
+    let keyword = params.keyword;
     this.setState({
       ...this.state,
       params: keyword
@@ -47,21 +47,21 @@ class StudentView extends Component {
   }
   getActiveTerm = () => {
     axios({
-        method: 'GET',
-        url: 'api/term',
+      method: 'GET',
+      url: 'api/term',
     }).then((response) => {
-        console.log('success');
-        this.setState({
-            ...this.state,
-            activeTerm: response.data
-        })
+      console.log('success');
+      this.setState({
+        ...this.state,
+        activeTerm: response.data
+      })
     }).catch((error) => {
-        console.log('error getting term', error)
+      console.log('error getting term', error)
     })
-}
+  }
   getLatestData = (keyword) => {
     axios({
-      method: 'GET', 
+      method: 'GET',
       url: `api/topics?name=${keyword}`
     }).then((response) => {
       this.setState({
@@ -69,7 +69,7 @@ class StudentView extends Component {
         data: response.data
       });
     }).catch((error) => {
-      console.log(`Error getting ${this.state.params}`, error); 
+      console.log(`Error getting ${this.state.params}`, error);
     })
   }
   handleChangeFor = (event, property) => {
@@ -82,79 +82,79 @@ class StudentView extends Component {
     this.setState({
       ...this.state,
       open: true,
-      topicSelected: {topic: topic, id: id},
+      topicSelected: { topic: topic, id: id },
       index: i
     });
   }
   postToServer = () => {
     axios({
-      method: 'PUT', 
-      url: `api/topics/claim?name=${this.state.params}`,
-      data: {topic: this.state.topicSelected.topic, student: this.state.student, email: this.state.email, claimed: true, id: this.state.topicSelected.id}
+      method: 'PUT',
+      url: `api/topics/claim`,
+      data: { topic: this.state.topicSelected.topic, student: this.state.student, email: this.state.email, claimed: true, id: this.state.topicSelected.id }
     }).then((response) => {
       this.getLatestData(this.state.params);
       this.setState({
-        ...this.state, 
+        ...this.state,
         lock: true
       })
     }).catch((error) => {
       alert('Something went wrong, please try again.')
-      console.log('Error posting to server', error); 
+      console.log('Error posting to server', error);
     })
   }
   render() {
     return (
       <div>
-{!this.state.lock ? (<main>
-  <Header term={this.state.activeTerm}/>
-  <div className="header">
+        {!this.state.lock ? (<main>
+          <Header term={this.state.activeTerm} />
+          <div className="header">
             {this.state.params === 'signals' && <h1>Signal Pathway Presentations</h1>} {this.state.params === 'clinical' && <h1>Clinical Trial Discussions</h1>}
           </div>
-  <p className="lead center">Claim the topic you'd like to present on. First come, first serve.</p>
-  <div className="container">
-  <table>
-    <thead>
-      <tr>
-        {this.state.params === 'signals' && <td>Signal Transduction Pathway</td>}{this.state.params === 'clinical' && <td>Clinical Trials</td>}
-        <td>Status</td>
-        <td>Claimed by</td>
-      </tr>
-    </thead>
-    <tbody>
-      {this.state.data.map((topic, i) => {
-        return (
-          <tr key={i}><td>{topic.topic}</td> <td>{!topic.claimed ? (<button className="claim" onClick={() => this.openDialogue(topic.topic, i, topic.id)}>Claim</button>) : (<p>Already claimed</p>)}</td><td>{topic.student} <span> - </span>{topic.email}</td></tr>
-        )
-      })}
-    </tbody>
+          <p className="lead center">Claim the topic you'd like to present on. First come, first serve.</p>
+          <div className="container">
+            <table>
+              <thead>
+                <tr>
+                  {this.state.params === 'signals' && <td>Signal Transduction Pathway</td>}{this.state.params === 'clinical' && <td>Clinical Trials</td>}
+                  <td>Status</td>
+                  <td>Claimed by</td>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.data.map((topic, i) => {
+                  return (
+                    <tr key={i}><td>{topic.topic}</td> <td>{!topic.claimed ? (<button className="claim" onClick={() => this.openDialogue(topic.topic, i, topic.id)}>Claim</button>) : (<p>Already claimed</p>)}</td><td>{topic.student} <span> - </span>{topic.email}</td></tr>
+                  )
+                })}
+              </tbody>
 
-  </table>
-  </div>
-  
-  <Dialog open={this.state.open}>
-    <div className="dialog-form">
-      <DialogTitle>Enter your information</DialogTitle>
-      <p>You are claiming: <b>{this.state.topicSelected.topic}</b></p>
-      <label>Name: </label><input onChange={(event) => this.handleChangeFor(event, 'student')} required/>
-      <label>Email: </label><input onChange={(event) => this.handleChangeFor(event, 'email')} required/>
-      <div className="flex-box">
-        <button onClick={() => this.claimTopic()}>Submit</button>
-        <button className="cancel" onClick={() => this.closeDialogue()}>Cancel</button>
-      </div>
+            </table>
+          </div>
 
-    </div>
-  </Dialog>
-</main>) : (<main>
- <Paper className="confirmation">
-  <div className="breathing-room">
-  <h3>Thank you for your selection</h3>
-      <p>Your presentation will be on: {this.state.topicSelected.topic}</p>
-      <p>Please note this for your records and then close this window.</p>
-  </div>
-      
-</Paper></main>)}
-   
-      
+          <Dialog open={this.state.open}>
+            <div className="dialog-form">
+              <DialogTitle>Enter your information</DialogTitle>
+              <p>You are claiming: <b>{this.state.topicSelected.topic}</b></p>
+              <label>Name: </label><input onChange={(event) => this.handleChangeFor(event, 'student')} required />
+              <label>Email: </label><input onChange={(event) => this.handleChangeFor(event, 'email')} required />
+              <div className="flex-box">
+                <p className="cancel" onClick={() => this.closeDialogue()}>Cancel</p>
+                <button onClick={() => this.claimTopic()}>Submit</button>
+              </div>
+
+            </div>
+          </Dialog>
+        </main>) : (<main>
+          <Paper className="confirmation">
+            <div className="breathing-room">
+              <h3>Thank you for your selection</h3>
+              <p>Your presentation will be on: {this.state.topicSelected.topic}</p>
+              <p>Please note this for your records and then close this window.</p>
+            </div>
+
+          </Paper></main>)}
+
+
       </div>
     );
   }

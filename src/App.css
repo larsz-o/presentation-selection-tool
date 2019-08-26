@@ -9,13 +9,18 @@ button {
   color: white;
   text-transform: uppercase;
   font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 button:focus{
   outline: none;
 }
 .cancel {
-  background-color: white;
   color: #FB3640;
+  font-size: 1.2em;
+  cursor: pointer;
+ margin: 10px;
 }
 .center {
   text-align: center;
@@ -36,7 +41,8 @@ button:focus{
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content:center;
+  justify-content: center;
+  margin-bottom: 10vh;
 }
 .dialog-form {
   padding: 20px; 
@@ -47,17 +53,19 @@ button:focus{
   justify-content: flex-end;
   margin-top: 5vh;
 }
+.full-width {
+  width: 100%;
+}
 h1 {
     font-size: 3rem;
     font-weight: 300;
-    line-height: 1.2;
 }
 h2 {
   font-weight: 200;
   margin-top: 0;
 }
 .header {
-  padding-bottom: 10vh;
+  padding-bottom: 2vh;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -65,7 +73,10 @@ h2 {
   justify-content: center;
   color: #0A2342;
 }
-
+html, body {
+  height: 100%;
+  background-color: #F5F5F5;
+}
 input {
   border: 0;
   border-bottom: 1px solid gray;
@@ -85,7 +96,6 @@ label {
   font-size: 1.25rem;
   font-weight: 300;
   margin-bottom: 2rem;
-  margin-top: 2rem;
 }
 @media only screen and (max-width: 600px) {
   .logo {
@@ -111,6 +121,9 @@ main {
   hyphens: auto;
   background-color: #F5F5F5;
   height: 100%;
+}
+p {
+  font-size: 1.1rem;
 }
 table {
   border-collapse: collapse;
