@@ -16,7 +16,7 @@ class InstructorView extends Component {
             activeTopic: '',
             term: '',
             year: 0,
-            category: '', 
+            category: '',
             termEdit: false,
             open: false,
             newDialog: false
@@ -75,13 +75,15 @@ class InstructorView extends Component {
         })
     }
     getCategories = (array) => {
+        console.log(array); 
         let categories = [];
-        for (let i = 0; i < array.length; i++){
-            if (categories.indexOf(array[i].category) !== -1){
+        for (let i = 0; i < array.length; i++) {
+            let string = String(array[i]);
+            if (string.indexOf(array[i].category !== -1)) {
                 categories.push(array[i].category)
             }
         }
-        console.log(categories); 
+        console.log(categories);
         this.setState({
             ...this.state,
             categories: categories
@@ -165,7 +167,7 @@ class InstructorView extends Component {
                 <div className="header">
                     <h1>Topics Console</h1>
                 </div>
-           
+
                 {this.state.termEdit && <div className="term-select">
                     <label>Term:</label>
                     <Select
@@ -181,7 +183,7 @@ class InstructorView extends Component {
                     <button onClick={() => this.saveTerm()}>Save</button>
                 </div>}
                 <div className="center breathing-room"><button onClick={() => this.openNewDialogue()}>Add new topic</button>
-                {!this.state.termEdit && <p onClick={()=>this.setState({...this.state, termEdit: true})} className="cancel">Edit term display dates</p>}</div>
+                    {!this.state.termEdit && <p onClick={() => this.setState({ ...this.state, termEdit: true })} className="cancel">Edit term display dates</p>}</div>
                 <div className="container">
                     <table>
                         <thead>
@@ -207,8 +209,13 @@ class InstructorView extends Component {
                         <DialogTitle>Enter topic information</DialogTitle>
                         <label>Name: </label><input value={this.state.editingTopic.topic} onChange={(event) => this.handleChangeFor(event)} />
                         <label>Category: </label><select>
-                            {/* need to create a drop-down of existing categories or give option to add new */}
+                            {this.state.categories.map((category, i) => {
+                                return (
+                                    <option key={i} value={category}></option>
+                                );
+                            })}
                         </select>
+                        <p>Category not listed? Create a new one: </p><input onChange={(event)=>this.handleTermChange(event, 'category')}/>
                         <div className="flex-box">
                             <p className="cancel" onClick={() => this.closeDialogue()}>Cancel</p>
                             <button onClick={() => this.editTopic()}>Submit</button>
@@ -222,11 +229,12 @@ class InstructorView extends Component {
                         <label>Name: </label><input value={this.state.newTopic} onChange={(event) => this.handleTermChange(event, 'newTopic')} />
                         <label>Category: </label><select>
                             {this.state.categories.map((category, i) => {
-                                return(
+                                return (
                                     <option key={i} value={category}></option>
                                 );
                             })}
                         </select>
+                        <p>Category not listed? Create a new one: </p><input onChange={(event)=>this.handleTermChange(event, 'category')}/>
                         <div className="flex-box">
                             <p className="cancel" onClick={() => this.closeDialogue()}>Cancel</p>
                             <button onClick={() => this.postTopic()}>Submit</button>
