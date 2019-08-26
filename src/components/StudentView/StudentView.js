@@ -134,7 +134,7 @@ class StudentView extends Component {
   <Dialog open={this.state.open}>
     <div className="dialog-form">
       <DialogTitle>Enter your information</DialogTitle>
-      <p>You are claiming: <b>{this.state.topicSelected.signal}</b></p>
+      <p>You are claiming: <b>{this.state.topicSelected.topic}</b></p>
       <label>Name: </label><input onChange={(event) => this.handleChangeFor(event, 'student')} required/>
       <label>Email: </label><input onChange={(event) => this.handleChangeFor(event, 'email')} required/>
       <div className="flex-box">

@@ -5,7 +5,7 @@ const pool = require('../modules/pool');
 // for instructors to add new topics
 router.post('/', (req, res) => {
     const entry = req.body;
-    const table = req.params.name;
+    const table = req.query.name;
     console.log(table); 
     const query = `INSERT INTO ${table} ("signal", "claimed") VALUES ($1, $2);`;
     pool.query(query, [entry.signal, entry.claimed]).then((results) => {
@@ -29,7 +29,7 @@ router.put('/', (req, res) => {
 router.put('/claim', (req, res) => {
     // if a signal is already claimed, don't let a user claim it. if it isn't, allow them to.
     const claim = req.body;
-    const table = req.params.name; 
+    const table = req.query.name; 
     console.log('claim: ' + claim)
     for (let item in claim){
         console.log(item)
@@ -63,7 +63,7 @@ router.put('/claim', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    const table = req.params.name; 
+    const table = req.query.name; 
     const query = `SELECT * FROM ${table};`;
     pool.query(query).then((results) => {
         res.send(results.rows);
