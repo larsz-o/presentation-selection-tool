@@ -217,7 +217,7 @@ class InstructorView extends Component {
                                 <option value={category} key={i}>{category}</option>
                             );
                         })}
-                        </select><button className="save-button" onClick={()=>this.applyFilter()}>Filter</button>
+                        </select><button className="save-button" onClick={()=>this.applyFilter()}>Apply Filter</button>
                     </div>
                 <div className="container">
                     <table>
