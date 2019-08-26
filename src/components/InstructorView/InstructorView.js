@@ -78,11 +78,10 @@ class InstructorView extends Component {
     getCategories = (array) => {
         let categories = [];
         for (let i = 0; i < array.length; i++) {
-            let string = String(array[i]);
-            console.log(string); 
-            if (string.indexOf(array[i].category == -1)) {
-                console.log(string.indexOf(array[i].category));
-                console.log(string.indexOf(array[i]));
+            let test = array[i].category;
+            if (categories.indexOf(test) == -1) {
+                console.log(test);
+                console.log(categories.indexOf(test));
                 categories.push(array[i].category)
             }
         }
