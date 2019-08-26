@@ -1,4 +1,7 @@
 import React, { Component } from 'react'; 
+import axios from 'axios';
+import { Dialog, DialogTitle, Input } from '@material-ui/core';
+import swal from 'sweetalert'; 
 
 class TopicsTable extends Component {
     constructor(props){
@@ -61,12 +64,12 @@ class TopicsTable extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {topics.map((topic, i) => {
+                            {this.props.topics.map((topic, i) => {
                                 return (
                                     <tr key={i}>
-                                        <td>{this.props.topic.topic}</td>
-                                        <td>{this.props.topic.category}</td>
-                                        <td><button onClick={() => this.openDialogue(topic)}>Edit</button><button onClick={() => this.deleteTopic(this.props.topic)}>Delete</button></td>
+                                        <td>{topic.topic}</td>
+                                        <td>{topic.category}</td>
+                                        <td><button onClick={() => this.openDialogue(topic)}>Edit</button><button onClick={() => this.deleteTopic(topic)}>Delete</button></td>
                                     </tr>
                                 );
                             })}

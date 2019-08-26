@@ -156,14 +156,14 @@ class InstructorView extends Component {
                     {!this.state.termEdit && <p onClick={() => this.setState({ ...this.state, termEdit: true })} className="cancel link">Edit term display dates</p>}</div>
                     {/* to do: filter results */}
                     <div className="flex-box col-11">
-                        <label>Filter by topic: </label><select onChange={(event)=>this.handleTermChange(event, 'filter')} value={this.state.filter}>
-                        <option value="">---</option>
+                        <label>Filter by topic: </label><Select onChange={(event)=>this.handleTermChange(event, 'filter')} value={this.state.filter}>
+                        <MenuItem value="">---</MenuItem>
                         {this.state.categories.map((category, i) => {
                             return(
-                                <option value={category} key={i}>{category}</option>
+                                <MenuItem value={category} key={i}>{category}</MenuItem>
                             );
                         })}
-                        </select>
+                        </Select>
                     </div>
                     <TopicsTable getLatestData={this.getLatestData} topics={topics} closeDialogue={this.closeDialogue}/>
                 {/* create a new topic */}
@@ -171,14 +171,14 @@ class InstructorView extends Component {
                     <div className="dialog-form">
                         <DialogTitle>Enter topic information</DialogTitle>
                         <label>Topic: </label><Input value={this.state.newTopic} onChange={(event) => this.handleTermChange(event, 'newTopic')} />
-                        <label>Category:</label><select value={this.state.category} onChange={(event)=>this.handleTermChange(event, 'category')}>
-                            <option value="">---</option>
+                        <label>Category:</label><Select value={this.state.category} onChange={(event)=>this.handleTermChange(event, 'category')}>
+                            <MenuItem value="">---</MenuItem>
                             {this.state.categories.map((category, i) => {
                                 return (
-                                    <option key={i} value={category}>{category}</option>
+                                    <MenuItem key={i} value={category}>{category}</MenuItem>
                                 );
                             })}
-                        </select>
+                        </Select>
                         {this.state.editCategory ? (<p className="cancel link" onClick={() => this.toggleEdit()}>Category not listed?</p>): (<div><p>Create a new category: </p><Input onChange={(event) => this.handleTermChange(event, 'category')} /></div>) }
                         <div className="flex-box">
                             <p className="cancel" onClick={() => this.closeDialogue()}>Cancel</p>
