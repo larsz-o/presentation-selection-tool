@@ -206,18 +206,11 @@ class InstructorView extends Component {
                         </tbody>
                     </table>
                 </div>
+                {/* edit an existing topic */}
                 <Dialog open={this.state.open}>
                     <div className="dialog-form">
                         <DialogTitle>Enter topic information</DialogTitle>
                         <label>Topic: </label><input value={this.state.editingTopic.topic} onChange={(event) => this.handleChangeFor(event)} />
-                        <label>Category (i.e. what assignment is this for?): </label><select>
-                            {this.state.categories.map((category, i) => {
-                                return (
-                                    <option key={i} value={category}>{category}</option>
-                                );
-                            })}
-                        </select>
-                        {this.state.editCategory ? (<p className="cancel link" onClick={() => this.toggleEdit()}>Category not listed?</p>): (<div><p>Create a new category: </p><input onChange={(event) => this.handleTermChange(event, 'category')} /></div>)}
                         <div className="flex-box">
                             <p className="cancel" onClick={() => this.closeDialogue()}>Cancel</p>
                             <button onClick={() => this.editTopic()}>Submit</button>
@@ -225,6 +218,7 @@ class InstructorView extends Component {
 
                     </div>
                 </Dialog>
+                {/* create a new topic */}
                 <Dialog open={this.state.newDialog}>
                     <div className="dialog-form">
                         <DialogTitle>Enter topic information</DialogTitle>
