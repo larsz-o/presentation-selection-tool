@@ -63,8 +63,8 @@ router.put('/claim', (req, res) => {
 
 router.get('/', (req, res) => {
     const topic = req.query.name; 
-    const query = `SELECT * FROM "topics" WHERE "category" = ${topic} ORDER BY "category" ASC;`;
-    pool.query(query).then((results) => {
+    const query = `SELECT * FROM "topics" WHERE "category" = $1 ORDER BY "category" ASC;`;
+    pool.query(query, [topic]).then((results) => {
         res.send(results.rows);
     }).catch((error) => {
         console.log(`Error getting topics`, error); 

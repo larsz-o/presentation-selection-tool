@@ -122,9 +122,6 @@ main {
   background-color: #F5F5F5;
   height: 100%;
 }
-p {
-  font-size: 1.1rem;
-}
 table {
   border-collapse: collapse;
   width: 90% !important;
