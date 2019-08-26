@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Dialog, DialogTitle, Paper, Input} from '@material-ui/core';
 import axios from 'axios';
 import Header from '../Header/Header';
+import swal from 'sweetalert';
 
 class StudentView extends Component {
   constructor(props) {
@@ -87,7 +88,6 @@ class StudentView extends Component {
     });
   }
   postToServer = () => {
-    console.log({ topic: this.state.topicSelected.topic, student: this.state.student, email: this.state.email, claimed: true, id: this.state.topicSelected.id })
     axios({
       method: 'PUT',
       url: `api/topics/claim`,
@@ -99,7 +99,7 @@ class StudentView extends Component {
         lock: true
       })
     }).catch((error) => {
-      alert('Something went wrong, please try again.')
+      swal('Uh-oh','Something went wrong, please try again.', 'error');
       console.log('Error posting to server', error);
     })
   }
