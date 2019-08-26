@@ -146,7 +146,7 @@ class InstructorView extends Component {
         });
     }
     postTopic = () => {
-        let regEx = /(a-z | _ )([^- / % & * # @ ) ( ! | $ , . ; : ~ ` + " ])/
+        let regEx = /^[A-Z a-z _][A-Z a-z 0-9 _]*$/
         if (regEx.test(this.state.category) && this.state.category.length < 64) {
             axios({
                 method: 'POST',
