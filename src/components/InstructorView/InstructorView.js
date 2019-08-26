@@ -229,7 +229,8 @@ class InstructorView extends Component {
                     <div className="dialog-form">
                         <DialogTitle>Enter topic information</DialogTitle>
                         <label>Topic: </label><Input value={this.state.newTopic} onChange={(event) => this.handleTermChange(event, 'newTopic')} />
-                        <label>Category:</label><select onChange={(event)=>this.handleTermChange(event, 'category')}>
+                        <label>Category:</label><select value={this.state.category} onChange={(event)=>this.handleTermChange(event, 'category')}>
+                            <option value="">---</option>
                             {this.state.categories.map((category, i) => {
                                 return (
                                     <option key={i} value={category}>{category}</option>
