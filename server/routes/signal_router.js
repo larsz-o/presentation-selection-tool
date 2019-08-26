@@ -29,10 +29,6 @@ router.put('/', (req, res) => {
 router.put('/claim', (req, res) => {
     // if a signal is already claimed, don't let a user claim it. if it isn't, allow them to.
     const claim = req.body;
-    console.log('claim: ' + claim)
-    for (let item in claim){
-        console.log(item)
-    }
     (async () => {
         const client = await pool.connect();
         try {

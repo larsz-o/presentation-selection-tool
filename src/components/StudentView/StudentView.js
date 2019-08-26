@@ -87,6 +87,7 @@ class StudentView extends Component {
     });
   }
   postToServer = () => {
+    console.log({ topic: this.state.topicSelected.topic, student: this.state.student, email: this.state.email, claimed: true, id: this.state.topicSelected.id })
     axios({
       method: 'PUT',
       url: `api/topics/claim`,
