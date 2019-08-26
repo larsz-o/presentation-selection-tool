@@ -39,7 +39,7 @@ router.put('/claim', (req, res) => {
                 await client.query('COMMIT');
                 res.sendStatus(403);
             } else {
-                query = `UPDATE "topics" SET "student" = $1, "email" = $2, "claimed" = $3 WHERE "id" = $5 AND "claimed" = false;`;
+                query = `UPDATE "topics" SET "student" = $1, "email" = $2, "claimed" = $3 WHERE "id" = $4 AND "claimed" = false;`;
                 await client.query(query, [claim.student, claim.email, claim.claimed, claim.id]);
                 await client.query('COMMIT');
                 res.sendStatus(201);
