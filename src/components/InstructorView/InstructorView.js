@@ -19,7 +19,8 @@ class InstructorView extends Component {
             category: '',
             termEdit: false,
             open: false,
-            newDialog: false
+            newDialog: false,
+            editCategory: true
         }
     }
     closeDialogue = () => {
@@ -75,11 +76,11 @@ class InstructorView extends Component {
         })
     }
     getCategories = (array) => {
-        console.log(array); 
+        console.log(array);
         let categories = [];
         for (let i = 0; i < array.length; i++) {
             let string = String(array[i]);
-            if (string.indexOf(array[i].category !== -1)) {
+            if (string.indexOf(array[i].category === -1)) {
                 categories.push(array[i].category)
             }
         }
@@ -160,6 +161,9 @@ class InstructorView extends Component {
             console.log('error posting term', error);
         })
     }
+    toggleEdit = () => {
+        this.setState({ ...this.state, editCategory: false });
+    }
     render() {
         return (
             <main>
@@ -211,11 +215,11 @@ class InstructorView extends Component {
                         <label>Category: </label><select>
                             {this.state.categories.map((category, i) => {
                                 return (
-                                    <option key={i} value={category}></option>
+                                    <option key={i} value={category}>{category}</option>
                                 );
                             })}
                         </select>
-                        <p>Category not listed? Create a new one: </p><input onChange={(event)=>this.handleTermChange(event, 'category')}/>
+                        {this.state.editCategory ? (<p className="cancel" onClick={() => this.toggleEdit()}>Category not listed?</p>): (<div><p>Create a new category: </p><input onChange={(event) => this.handleTermChange(event, 'category')} /></div>)}
                         <div className="flex-box">
                             <p className="cancel" onClick={() => this.closeDialogue()}>Cancel</p>
                             <button onClick={() => this.editTopic()}>Submit</button>
@@ -230,11 +234,11 @@ class InstructorView extends Component {
                         <label>Category: </label><select>
                             {this.state.categories.map((category, i) => {
                                 return (
-                                    <option key={i} value={category}></option>
+                                    <option key={i} value={category}>{category}</option>
                                 );
                             })}
                         </select>
-                        <p>Category not listed? Create a new one: </p><input onChange={(event)=>this.handleTermChange(event, 'category')}/>
+                        {this.state.editCategory ? (<p className="cancel" onClick={() => this.toggleEdit()}>Category not listed?</p>): (<div><p>Create a new category: </p><input onChange={(event) => this.handleTermChange(event, 'category')} /></div>) }
                         <div className="flex-box">
                             <p className="cancel" onClick={() => this.closeDialogue()}>Cancel</p>
                             <button onClick={() => this.postTopic()}>Submit</button>
