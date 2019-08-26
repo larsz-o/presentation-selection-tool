@@ -186,6 +186,23 @@ class InstructorView extends Component {
             console.log('error posting term', error);
         })
     }
+    sortData = (property) => {
+        if(this.state.filtered.length === 0) {
+            let topics = this.state.topics;
+            let sorted = topics.sort((a, b) =>  a.property, b.property ? 1 : -1);
+            this.setState({
+                ...this.state, 
+                topics: sorted
+            })
+        } else {
+            let topics = this.state.filtered; 
+            let sorted = topics.sort((a, b) =>  a.property, b.property ? 1 : -1);
+            this.setState({
+                ...this.state,
+                filtered: sorted
+            })
+        }
+    }
     toggleEdit = () => {
         this.setState({ ...this.state, editCategory: false });
     }
@@ -229,8 +246,8 @@ class InstructorView extends Component {
                     <table>
                         <thead>
                             <tr>
-                                <td>Topic</td>
-                                <td>Category</td>
+                                <td onClick={()=>this.sortData('topic')}>Topic</td>
+                                <td onClick={()=>this.sortData('category')}>Category</td>
                                 <td>Actions</td>
                             </tr>
                         </thead>
