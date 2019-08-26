@@ -115,7 +115,7 @@ class StudentView extends Component {
             <table>
               <thead>
                 <tr>
-                  {this.state.params === 'signals' && <td>Signal Transduction Pathway</td>}{this.state.params === 'clinical' && <td>Clinical Trials</td>}
+                  <td>Topic</td>
                   <td>Status</td>
                   <td>Claimed by</td>
                 </tr>

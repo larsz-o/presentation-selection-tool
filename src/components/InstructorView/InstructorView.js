@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Header/Header';
 import axios from 'axios';
 import { Dialog, DialogTitle, Select, MenuItem, Input } from '@material-ui/core';
+import swal from 'sweetalert'; 
 
 class InstructorView extends Component {
     constructor(props) {
@@ -41,7 +42,7 @@ class InstructorView extends Component {
                 data: topic
             }).then(() => {
                 this.getLatestData();
-                alert(`${topic.topic} deleted!`)
+                swal('Success', 'The topic has been deleted', 'success');
             }).catch((error) => {
                 console.log('Error deleting', error);
             })
@@ -55,7 +56,7 @@ class InstructorView extends Component {
         }).then(() => {
             this.getLatestData();
             this.closeDialogue();
-            alert('Edit successful');
+            swal('Success', 'The topic has been edited', 'success');
         }).catch((error) => {
             console.log('Error updating', error);
         })
@@ -133,7 +134,7 @@ class InstructorView extends Component {
             data: { topic: this.state.newTopic, claimed: false, category: this.state.category }
         }).then(() => {
             this.closeDialogue();
-            alert(`${this.state.newTopic} created`)
+            swal('Success', 'The topic has been created!', 'success');
             this.getLatestData();
         }).catch((error) => {
             console.log('Error posting topic', error);
@@ -146,7 +147,6 @@ class InstructorView extends Component {
             url: 'api/term',
             data: { term: this.state.term, year: year }
         }).then(() => {
-            console.log('success');
             this.getActiveTerm();
             this.setState({
                 ...this.state,
@@ -190,6 +190,7 @@ class InstructorView extends Component {
                         <thead>
                             <tr>
                                 <td>Topic</td>
+                                <td>Category</td>
                                 <td>Actions</td>
                             </tr>
                         </thead>
@@ -198,6 +199,7 @@ class InstructorView extends Component {
                                 return (
                                     <tr key={i}>
                                         <td>{topic.topic}</td>
+                                        <td>{topic.category}</td>
                                         <td><button onClick={() => this.openDialogue(topic)}>Edit</button><button onClick={() => this.deleteTopic(topic)}>Delete</button></td>
                                     </tr>
                                 );
