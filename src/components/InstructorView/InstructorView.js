@@ -189,14 +189,16 @@ class InstructorView extends Component {
     sortData = (property) => {
         if(this.state.filtered.length === 0) {
             let topics = this.state.topics;
-            let sorted = topics.sort((a, b) =>  a.property, b.property ? 1 : -1);
+            let sorted = topics.sort((a, b) => a.property - b.property);
+            console.log(sorted);
             this.setState({
                 ...this.state, 
                 topics: sorted
             })
         } else {
             let topics = this.state.filtered; 
-            let sorted = topics.sort((a, b) =>  a.property, b.property ? 1 : -1);
+            let sorted = topics.sort((a, b) => a.property - b.property);
+            console.log(sorted);
             this.setState({
                 ...this.state,
                 filtered: sorted
@@ -218,8 +220,7 @@ class InstructorView extends Component {
                     <label>Term:</label>
                     <Select
                         value={this.state.term}
-                        onChange={(event) => this.handleTermChange(event, 'term')}
-                    >
+                        onChange={(event) => this.handleTermChange(event, 'term')}>
                         <MenuItem value={'Fall-1'}>Fall-1</MenuItem>
                         <MenuItem value={'Fall-2'}>Fall-2</MenuItem>
                         <MenuItem value={'Spring-1'}>Spring-1</MenuItem>
@@ -231,7 +232,6 @@ class InstructorView extends Component {
                 </div>}
                 <div className="center breathing-room"><button onClick={() => this.openNewDialogue()}>Add new topic</button>
                     {!this.state.termEdit && <p onClick={() => this.setState({ ...this.state, termEdit: true })} className="cancel link">Edit term display dates</p>}</div>
-                    {/* to do: filter results */}
                     <div className="flex-box col-11">
                      <select onChange={(event)=>this.handleTermChange(event, 'filter')} value={this.state.filter}>
                         <option value="">View All</option>
