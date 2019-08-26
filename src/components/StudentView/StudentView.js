@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dialog, DialogTitle, Paper } from '@material-ui/core';
+import { Dialog, DialogTitle, Paper, Input} from '@material-ui/core';
 import axios from 'axios';
 import Header from '../Header/Header';
 
@@ -135,8 +135,8 @@ class StudentView extends Component {
             <div className="dialog-form">
               <DialogTitle>Enter your information</DialogTitle>
               <p>You are claiming: <b>{this.state.topicSelected.topic}</b></p>
-              <label>Name: </label><input onChange={(event) => this.handleChangeFor(event, 'student')} required />
-              <label>Email: </label><input onChange={(event) => this.handleChangeFor(event, 'email')} required />
+              <label>Name: </label><Input onChange={(event) => this.handleChangeFor(event, 'student')} required />
+              <label>Email: </label><Input onChange={(event) => this.handleChangeFor(event, 'email')} required />
               <div className="flex-box">
                 <p className="cancel" onClick={() => this.closeDialogue()}>Cancel</p>
                 <button onClick={() => this.claimTopic()}>Submit</button>

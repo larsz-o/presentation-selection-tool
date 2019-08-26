@@ -3,7 +3,6 @@ import Header from '../Header/Header';
 import axios from 'axios';
 import { Dialog, DialogTitle, Select, MenuItem, Input } from '@material-ui/core';
 
-//to do: create drop-down menu for which topic they'd like to edit. set that in state, then use that string to do all the fetching, adding, and editing 
 class InstructorView extends Component {
     constructor(props) {
         super(props);
@@ -210,7 +209,7 @@ class InstructorView extends Component {
                 <Dialog open={this.state.open}>
                     <div className="dialog-form">
                         <DialogTitle>Enter topic information</DialogTitle>
-                        <label>Topic: </label><input value={this.state.editingTopic.topic} onChange={(event) => this.handleChangeFor(event)} />
+                        <label>Topic: </label><Input value={this.state.editingTopic.topic} onChange={(event) => this.handleChangeFor(event)} />
                         <div className="flex-box">
                             <p className="cancel" onClick={() => this.closeDialogue()}>Cancel</p>
                             <button onClick={() => this.editTopic()}>Submit</button>
@@ -222,15 +221,15 @@ class InstructorView extends Component {
                 <Dialog open={this.state.newDialog}>
                     <div className="dialog-form">
                         <DialogTitle>Enter topic information</DialogTitle>
-                        <label>Topic: </label><input value={this.state.newTopic} onChange={(event) => this.handleTermChange(event, 'newTopic')} />
-                        <label>Category:</label><select>
+                        <label>Topic: </label><Input value={this.state.newTopic} onChange={(event) => this.handleTermChange(event, 'newTopic')} />
+                        <label>Category:</label><select onChange={(event)=>this.handleTermChange(event, 'category')}>
                             {this.state.categories.map((category, i) => {
                                 return (
                                     <option key={i} value={category}>{category}</option>
                                 );
                             })}
                         </select>
-                        {this.state.editCategory ? (<p className="cancel link" onClick={() => this.toggleEdit()}>Category not listed?</p>): (<div><p>Create a new category: </p><input onChange={(event) => this.handleTermChange(event, 'category')} /></div>) }
+                        {this.state.editCategory ? (<p className="cancel link" onClick={() => this.toggleEdit()}>Category not listed?</p>): (<div><p>Create a new category: </p><Input onChange={(event) => this.handleTermChange(event, 'category')} /></div>) }
                         <div className="flex-box">
                             <p className="cancel" onClick={() => this.closeDialogue()}>Cancel</p>
                             <button onClick={() => this.postTopic()}>Submit</button>
