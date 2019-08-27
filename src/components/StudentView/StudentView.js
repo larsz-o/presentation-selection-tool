@@ -136,6 +136,7 @@ class StudentView extends Component {
             <div className="dialog-form">
               <DialogTitle>Enter your information</DialogTitle>
               <p>You are claiming: <b>{this.state.topicSelected.topic}</b></p>
+              <p className="warning">You will not be able to change this selection after you submit it. Please be sure this is the selection you want.</p>
               <label>Name: </label><Input onChange={(event) => this.handleChangeFor(event, 'student')} required />
               <label>Email: </label><Input onChange={(event) => this.handleChangeFor(event, 'email')} required />
               <div className="flex-box">

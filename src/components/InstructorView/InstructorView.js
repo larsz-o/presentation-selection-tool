@@ -98,7 +98,7 @@ class InstructorView extends Component {
         let categories = [];
         for (let i = 0; i < array.length; i++) {
             let test = array[i].category;
-            if (categories.indexOf(test) == -1) {
+            if (categories.indexOf(test) === -1) {
                 categories.push(array[i].category)
             }
         }
