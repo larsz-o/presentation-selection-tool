@@ -134,7 +134,7 @@ class StudentView extends Component {
 
           <Dialog open={this.state.open}>
             <div className="dialog-form">
-              <DialogTitle>Enter your information</DialogTitle>
+              <DialogTitle><h3>Enter your information</h3></DialogTitle>
               <p>You are claiming: <b>{this.state.topicSelected.topic}</b></p>
               <p className="warning">You will not be able to change this selection after you submit it. Please be sure this is the selection you want.</p>
               <label>Name: </label><Input onChange={(event) => this.handleChangeFor(event, 'student')} required />
@@ -148,8 +148,8 @@ class StudentView extends Component {
           </Dialog>
         </main>) : (<main>
           <Paper className="confirmation">
-            <div className="breathing-room">
-              <h3>Thank you for your selection</h3>
+         <div className="breathing-room">
+         <DialogTitle><h3>Thank you for your selection</h3></DialogTitle>
               <p>Your presentation will be on: {this.state.topicSelected.topic}</p>
               <p>Please note this for your records and then close this window.</p>
             </div>
