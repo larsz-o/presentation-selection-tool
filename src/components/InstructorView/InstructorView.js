@@ -46,7 +46,8 @@ class InstructorView extends Component {
         this.setState({
             ...this.state,
             open: false,
-            newDialog: false
+            newDialog: false, 
+            editCategory: false
         })
     }
     componentDidMount = () => {
