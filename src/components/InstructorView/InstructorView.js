@@ -188,13 +188,13 @@ class InstructorView extends Component {
             console.log('error posting term', error);
         })
     }
-    sortData = (key) => {
+    sortData = () => {
         asc = !asc; 
         if(this.state.filtered.length === 0) {
             let topics = this.state.topics;
             topics.sort(function(a, b){
-                let keyA = a.topic;
-                let keyB = b.topic;
+                let keyA = a.topic.toLowerCase();
+                let keyB = b.topic.toLowerCase();
                 // Compare the 2 dates
                     //descending 
                     if(asc === false){
