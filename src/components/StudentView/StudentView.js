@@ -110,6 +110,7 @@ class StudentView extends Component {
           <Header term={this.state.activeTerm} />
           <div className="header">
             {this.state.params === 'signals' && <h1>Signal Pathway Presentations</h1>} {this.state.params === 'clinical' && <h1>Clinical Trial Discussions</h1>}
+            {this.state.params === 'cancer' && <h1>Cancer Paper Discussions</h1>}
           </div>
           <p className="lead center">Choose a topic below. Once you've claimed a topic, you are responsible for it. <b>Please only pick one.</b></p>
           <div className="container">
@@ -150,7 +151,7 @@ class StudentView extends Component {
           <Paper className="confirmation">
          <div className="breathing-room">
          <DialogTitle><h3>Thank you for your selection</h3></DialogTitle>
-              <p>Your presentation will be on: {this.state.topicSelected.topic}</p>
+              <p>Your have chosen: {this.state.topicSelected.topic}</p>
               <p>Please note this for your records and then close this window.</p>
             </div>
 
