@@ -32,6 +32,7 @@ button:focus{
   height: 50vh;
   text-align: center;
   font-size: 1.2em;
+  background-color: rgba(112, 112, 112, .3);
 }
 .confirmation > div {
   padding: 10px;
@@ -43,6 +44,9 @@ button:focus{
   flex-wrap: nowrap;
   justify-content: center;
   margin-bottom: 10vh;
+}
+.dark {
+  background-image: url('./soap.jpg');
 }
 .delete-button {
   background-color: #FB3640;

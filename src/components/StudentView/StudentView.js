@@ -147,7 +147,7 @@ class StudentView extends Component {
 
             </div>
           </Dialog>
-        </main>) : (<main>
+        </main>) : (<main className="dark">
           <Paper className="confirmation">
          <div className="breathing-room">
          <DialogTitle><h3>Thank you for your selection</h3></DialogTitle>
