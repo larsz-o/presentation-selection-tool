@@ -26,13 +26,12 @@ button:focus{
   text-align: center;
 }
 .confirmation {
-  margin-left: 25vw;
-  margin-right: 25vw;
-  margin-top: 25vh;
   height: 50vh;
   text-align: center;
   font-size: 1.2em;
   background-color: rgba(112, 112, 112, .3);
+  color: white;
+
 }
 .confirmation > div {
   padding: 10px;
@@ -97,6 +96,9 @@ html, body {
   height: 100%;
   background-color: #F5F5F5;
   font-family: 'Roboto Condensed', sans-serif;
+}
+.icon:hover {
+  cursor: pointer;
 }
 input {
   border: 0;

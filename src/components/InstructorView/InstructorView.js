@@ -372,8 +372,8 @@ class InstructorView extends Component {
                                         <td>{topic.topic}</td>
                                         <td>{topic.category}</td>
                                         <td className="flex-start">{topic.student} {topic.student !== null &&
-                                            <div>{topic.student.length >= 1 && <Clear onClick={() => this.resetTopic(topic)} />}</div>}</td>
-                                        <td><Edit onClick={() => this.openDialogue(topic)} /><Delete onClick={() => this.deleteTopic(topic)} /></td>
+                                            <div>{topic.student.length >= 1 && <Clear className="icon" onClick={() => this.resetTopic(topic)} />}</div>}</td>
+                                        <td><Edit className="icon" onClick={() => this.openDialogue(topic)} /><Delete className="icon" onClick={() => this.deleteTopic(topic)} /></td>
                                     </tr>
                                 );
                             })) : (this.state.filtered.map((topic, i) => {
@@ -382,8 +382,8 @@ class InstructorView extends Component {
                                         <td>{topic.topic}</td>
                                         <td>{topic.category}</td>
                                         <td className="flex-start">{topic.student} {topic.student !== null &&
-                                            <div>{topic.student.length >= 1 && <Clear onClick={() => this.resetTopic(topic)} />}</div>}</td>
-                                        <td><Edit onClick={() => this.openDialogue(topic)} /><Delete onClick={() => this.deleteTopic(topic)} /></td>
+                                            <div>{topic.student.length >= 1 && <Clear className="icon" onClick={() => this.resetTopic(topic)} />}</div>}</td>
+                                        <td><Edit className="icon" onClick={() => this.openDialogue(topic)} /><Delete className="icon" onClick={() => this.deleteTopic(topic)} /></td>
                                     </tr>
                                 );
                             }))}
