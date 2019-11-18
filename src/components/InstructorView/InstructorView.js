@@ -172,27 +172,59 @@ class InstructorView extends Component {
     }
     resetAll = () => {
         //when clicked, remove the student claims for all topics 
-        axios({
-            method: 'PUT',
-            url: `api/topics/reset/all`
-        }).then((response) => {
-            this.getLatestData();
-            console.log('Success!', response)
-        }).catch((error) => {
-            console.log('Error updating topics', error);
-        })
+        swal({
+            title: "Are you sure?",
+            text: "Unclaiming all topics will remove all student data from each topic. This action cannot be undone. You will typically do this action at the beginning of a new term.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                axios({
+                    method: 'PUT',
+                    url: `api/topics/reset/all`
+                }).then((response) => {
+                    this.getLatestData();
+                    swal("All topics have bene unclaimed!", {
+                        icon: "success",
+                      });
+                }).catch((error) => {
+                    console.log('Error updating topics', error);
+                })
+            } else {
+              swal("Success", "Alright, all data is safe!", 'success');
+            }
+          });
     }
     resetTopic = (topic) => {
         // when clicked, take this data and remove the student information from it 
-        axios({
-            method: 'PUT',
-            url: `api/topics/reset&id=${topic.id}`
-        }).then((response) => {
-            this.getLatestData();
-            console.log('Success!', response)
-        }).catch((error) => {
-            console.log('Error updating topic', error);
-        })
+        swal({
+            title: "Are you sure?",
+            text: `You are attempting to remove a student's data from ${topic.topic}. Is this what you wanted to do?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                axios({
+                    method: 'PUT',
+                    url: `api/topics/reset&id=${topic.id}`
+                }).then((response) => {
+                    this.getLatestData();
+                    swal( `${topic.topic} has been unclaimed!`, {
+                        icon: "success",
+                      });
+                }).catch((error) => {
+                    console.log('Error updating topics', error);
+                })
+            } else {
+              swal("Success", "Alright, all data is safe!", 'success');
+            }
+          });
+ 
+     
     }
     saveTerm = () => {
         let year = parseInt(this.state.year);
@@ -287,6 +319,7 @@ class InstructorView extends Component {
                     <span className="cancel" onClick={()=>this.setState({...this.state, termEdit: false})}>cancel</span>
                 </div>}
                 <div className="center breathing-room"><button onClick={() => this.openNewDialogue()}>Add new topic</button>
+                <button className="delete-button" onClick={()=>this.resetAll()}>Unclaim all topics</button>
                     {!this.state.termEdit && <p onClick={() => this.setState({ ...this.state, termEdit: true })} className="cancel link">Edit term display dates</p>}</div>
                     <div className="flex-box col-11">
                      <select onChange={(event)=>this.handleTermChange(event, 'filter')} value={this.state.filter}>
@@ -297,9 +330,11 @@ class InstructorView extends Component {
                             );
                         })}
                         </select><button className="save-button" onClick={()=>this.applyFilter()}>Apply Filter</button>
+                        
                     </div>
+    
+                    
                 <div className="container">
-                    <button className="delete-button" onClick={()=>this.resetAll()}>Unclaim all topics</button>
                     <table>
                         <thead>
                             <tr>
