@@ -351,7 +351,7 @@ class InstructorView extends Component {
                                     <tr key={i}>
                                         <td>{topic.topic}</td>
                                         <td>{topic.category}</td>
-                                        <td>{topic.student} <button className="delete-button" onClick={()=>this.resetTopic(topic)}>Delete</button></td>
+                                <td>{topic.student} {topic.student.length > 0 && <button className="delete-button" onClick={()=>this.resetTopic(topic)}>Unclaim</button>}</td>
                                         <td><button onClick={() => this.openDialogue(topic)}>Edit</button><button className="delete-button" onClick={() => this.deleteTopic(topic)}>Delete</button></td>
                                     </tr>
                                 );
