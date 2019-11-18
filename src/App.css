@@ -26,16 +26,17 @@ button:focus{
   text-align: center;
 }
 .confirmation {
-  margin-top: 50vh;
+  margin-top: 25vh;
   margin-bottom: 25vh; 
   text-align: center;
   font-size: 1.2em;
-  background-color: rgba(10,35,66, .3);
+  background-color: rgba(10,35,66, .5);
   color: white;
 }
 .confirmation > div {
   padding: 10px;
   margin: 10px; 
+  height: 100%;
 }
 .container {
   display: flex;
