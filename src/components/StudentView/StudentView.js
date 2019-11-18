@@ -148,8 +148,8 @@ class StudentView extends Component {
             </div>
           </Dialog>
         </main>) : (<main className="dark flex-box-center">
-          <div className="confirmation col-6">
-         <div className="breathing-room">
+          <div className="col-6">
+         <div className="breathing-room confirmation">
          <DialogTitle><h3>Thank you for your selection</h3></DialogTitle>
               <p>Your have chosen: {this.state.topicSelected.topic}</p>
               <p>Please note this for your records and then close this window.</p>

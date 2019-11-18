@@ -28,15 +28,12 @@ button:focus{
 .confirmation {
   margin-top: 25vh;
   margin-bottom: 25vh; 
+  padding: 2em;
+  height: 100%;
   text-align: center;
   font-size: 1.2em;
   background-color: rgba(10,35,66, .5);
   color: white;
-}
-.confirmation > div {
-  padding: 10px;
-  margin: 10px; 
-  height: 100%;
 }
 .container {
   display: flex;
@@ -46,7 +43,7 @@ button:focus{
   margin-bottom: 10vh;
 }
 .dark {
-background-image: url('./soap.jpg');
+background-image: url('./jelly.jpg');
  background-position: cover;
  background-repeat: no-repeat;
  height: 100vh;
