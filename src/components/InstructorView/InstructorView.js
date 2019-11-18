@@ -3,6 +3,7 @@ import Header from '../Header/Header';
 import axios from 'axios';
 import { Dialog, DialogTitle, Select, MenuItem, Input } from '@material-ui/core';
 import swal from 'sweetalert'; 
+import { Delete, Edit } from '@material-ui/icons'; 
 
 let asc = true; 
 class InstructorView extends Component {
@@ -210,7 +211,7 @@ class InstructorView extends Component {
             if (willDelete) {
                 axios({
                     method: 'PUT',
-                    url: `api/topics/reset&id=${topic.id}`
+                    url: `api/topics/reset?id=${topic.id}`
                 }).then((response) => {
                     this.getLatestData();
                     swal( `${topic.topic} has been unclaimed!`, {
@@ -351,8 +352,8 @@ class InstructorView extends Component {
                                     <tr key={i}>
                                         <td>{topic.topic}</td>
                                         <td>{topic.category}</td>
-                                <td>{topic.student} {topic.student !== null && <button className="delete-button" onClick={()=>this.resetTopic(topic)}>Unclaim</button>}</td>
-                                        <td><button onClick={() => this.openDialogue(topic)}>Edit</button><button className="delete-button" onClick={() => this.deleteTopic(topic)}>Delete</button></td>
+                                <td className="flex-evenly">{topic.student} {topic.student !== null && <Delete onClick={()=>this.resetTopic(topic)}/>}</td>
+                                        <td><Edit onClick={() => this.openDialogue(topic)}/><Delete onClick={() => this.deleteTopic(topic)}/></td>
                                     </tr>
                                 );
                             })) : (this.state.filtered.map((topic, i ) => {
@@ -360,7 +361,7 @@ class InstructorView extends Component {
                                     <tr key={i}>
                                     <td>{topic.topic}</td>
                                     <td>{topic.category}</td>
-                                    <td><button onClick={() => this.openDialogue(topic)}>Edit</button><button onClick={() => this.deleteTopic(topic)}>Delete</button></td>
+                                    <td><Edit onClick={() => this.openDialogue(topic)}/><Delete onClick={() => this.deleteTopic(topic)}/></td>
                                 </tr>
                                 );
                             }))}
