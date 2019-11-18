@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import Header from '../Header/Header';
 import axios from 'axios';
 import { Dialog, DialogTitle, Select, MenuItem, Input } from '@material-ui/core';
-import swal from 'sweetalert'; 
-import { Delete, Edit, Clear } from '@material-ui/icons'; 
+import swal from 'sweetalert';
+import { Delete, Edit, Clear } from '@material-ui/icons';
 
-let asc = true; 
+let asc = true;
 class InstructorView extends Component {
     constructor(props) {
         super(props);
@@ -28,9 +28,9 @@ class InstructorView extends Component {
         }
     }
     applyFilter = () => {
-        let topics = this.state.topics; 
-        if (this.state.filter !== ''){
-            let filtered = topics.filter(topic => topic.category === this.state.filter); 
+        let topics = this.state.topics;
+        if (this.state.filter !== '') {
+            let filtered = topics.filter(topic => topic.category === this.state.filter);
             console.log(filtered);
             this.setState({
                 ...this.state,
@@ -38,7 +38,7 @@ class InstructorView extends Component {
             })
         } else {
             this.setState({
-                ...this.state, 
+                ...this.state,
                 filtered: topics
             })
         }
@@ -47,7 +47,7 @@ class InstructorView extends Component {
         this.setState({
             ...this.state,
             open: false,
-            newDialog: false, 
+            newDialog: false,
             editCategory: true
         })
     }
@@ -56,18 +56,27 @@ class InstructorView extends Component {
         this.getActiveTerm();
     }
     deleteTopic = (topic) => {
-        if (window.confirm(`Are you sure you want to delete ${topic.topic}?`)) {
-            axios({
-                method: 'DELETE',
-                url: 'api/topics',
-                data: topic
-            }).then(() => {
-                this.getLatestData();
-                swal('Success', 'The topic has been deleted', 'success');
-            }).catch((error) => {
-                console.log('Error deleting', error);
-            })
-        }
+        swal({
+            title: `Are you sure you want to delete ${topic.topic}?`,
+            text: "This action cannot be undone.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    axios({
+                        method: 'DELETE',
+                        url: 'api/topics',
+                        data: topic
+                    }).then(() => {
+                        this.getLatestData();
+                        swal('Success', 'The topic has been deleted', 'success');
+                    }).catch((error) => {
+                        console.log('Error deleting', error);
+                    })
+                }
+            });
     }
     editTopic = () => {
         axios({
@@ -169,7 +178,7 @@ class InstructorView extends Component {
                 console.log('Error posting topic', error);
             })
         } else {
-            swal('Uh-oh', 'Your category name can only contain numbers, letters, and underscores and it must be less than 64 characters. Please try again.', 'error'); 
+            swal('Uh-oh', 'Your category name can only contain numbers, letters, and underscores and it must be less than 64 characters. Please try again.', 'error');
         }
     }
     resetAll = () => {
@@ -180,24 +189,24 @@ class InstructorView extends Component {
             icon: "warning",
             buttons: true,
             dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-                axios({
-                    method: 'PUT',
-                    url: `api/topics/reset/all`
-                }).then((response) => {
-                    this.getLatestData();
-                    swal("All topics have bene unclaimed!", {
-                        icon: "success",
-                      });
-                }).catch((error) => {
-                    console.log('Error updating topics', error);
-                })
-            } else {
-              swal("Success", "Alright, all data is safe!", 'success');
-            }
-          });
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    axios({
+                        method: 'PUT',
+                        url: `api/topics/reset/all`
+                    }).then((response) => {
+                        this.getLatestData();
+                        swal("All topics have bene unclaimed!", {
+                            icon: "success",
+                        });
+                    }).catch((error) => {
+                        console.log('Error updating topics', error);
+                    })
+                } else {
+                    swal("Success", "Alright, all data is safe!", 'success');
+                }
+            });
     }
     resetTopic = (topic) => {
         // when clicked, take this data and remove the student information from it 
@@ -207,26 +216,26 @@ class InstructorView extends Component {
             icon: "warning",
             buttons: true,
             dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-                axios({
-                    method: 'PUT',
-                    url: `api/topics/reset?id=${topic.id}`
-                }).then((response) => {
-                    this.getLatestData();
-                    swal( `${topic.topic} has been unclaimed!`, {
-                        icon: "success",
-                      });
-                }).catch((error) => {
-                    console.log('Error updating topics', error);
-                })
-            } else {
-              swal("Success", "Alright, all data is safe!", 'success');
-            }
-          });
- 
-     
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    axios({
+                        method: 'PUT',
+                        url: `api/topics/reset?id=${topic.id}`
+                    }).then((response) => {
+                        this.getLatestData();
+                        swal(`${topic.topic} has been unclaimed!`, {
+                            icon: "success",
+                        });
+                    }).catch((error) => {
+                        console.log('Error updating topics', error);
+                    })
+                } else {
+                    swal("Success", "Alright, all data is safe!", 'success');
+                }
+            });
+
+
     }
     saveTerm = () => {
         let year = parseInt(this.state.year);
@@ -247,47 +256,47 @@ class InstructorView extends Component {
         })
     }
     sortData = () => {
-        asc = !asc; 
-        if(this.state.filtered.length === 0) {
+        asc = !asc;
+        if (this.state.filtered.length === 0) {
             let topics = this.state.topics;
-            topics.sort(function(a, b){
+            topics.sort(function (a, b) {
                 let keyA = a.topic.toLowerCase();
                 let keyB = b.topic.toLowerCase();
                 // Compare the 2 dates
-                    //descending 
-                    if(asc === false){
-                        if(keyA > keyB) return -1;
-                        if(keyA < keyB) return 1;
-                        return 0;
-                    } else {
-                         //acscending 
-                        if(keyA < keyB) return -1;
-                        if(keyA > keyB) return 1;
-                        return 0;
-                    }
+                //descending 
+                if (asc === false) {
+                    if (keyA > keyB) return -1;
+                    if (keyA < keyB) return 1;
+                    return 0;
+                } else {
+                    //acscending 
+                    if (keyA < keyB) return -1;
+                    if (keyA > keyB) return 1;
+                    return 0;
+                }
             });
             this.setState({
-                ...this.state, 
+                ...this.state,
                 topics: topics
             })
         } else {
-            let topics = this.state.filtered; 
-            topics.sort(function(a, b){
+            let topics = this.state.filtered;
+            topics.sort(function (a, b) {
                 //descending 
                 let keyA = a.topic;
                 let keyB = b.topic;
-                  // Compare the 2 dates
-                    //descending 
-                    if(asc === false){
-                        if(keyA > keyB) return -1;
-                        if(keyA < keyB) return 1;
-                        return 0;
-                    } else {
-                         //acscending 
-                        if(keyA < keyB) return -1;
-                        if(keyA > keyB) return 1;
-                        return 0;
-                    }
+                // Compare the 2 dates
+                //descending 
+                if (asc === false) {
+                    if (keyA > keyB) return -1;
+                    if (keyA < keyB) return 1;
+                    return 0;
+                } else {
+                    //acscending 
+                    if (keyA < keyB) return -1;
+                    if (keyA > keyB) return 1;
+                    return 0;
+                }
             });
             this.setState({
                 ...this.state,
@@ -302,6 +311,7 @@ class InstructorView extends Component {
         return (
             <main>
                 <Header term={this.state.activeTerm} />
+
                 <div className="header">
                     <h1>Topics Console</h1>
                 </div>
@@ -318,29 +328,37 @@ class InstructorView extends Component {
                     </Select>
                     <label>Year:</label><Input onChange={(event) => this.handleTermChange(event, 'year')} />
                     <button className="save-button" onClick={() => this.saveTerm()}>Save</button>
-                    <span className="cancel" onClick={()=>this.setState({...this.state, termEdit: false})}>cancel</span>
+                    <span className="cancel" onClick={() => this.setState({ ...this.state, termEdit: false })}>cancel</span>
                 </div>}
-                <div className="center breathing-room"><button onClick={() => this.openNewDialogue()}>Add new topic</button>
-                <button className="delete-button" onClick={()=>this.resetAll()}>Unclaim all topics</button>
-                    {!this.state.termEdit && <p onClick={() => this.setState({ ...this.state, termEdit: true })} className="cancel link">Edit term display dates</p>}</div>
-                    <div className="flex-box col-11">
-                     <select onChange={(event)=>this.handleTermChange(event, 'filter')} value={this.state.filter}>
+                <div className="flex-box-center">
+                    <div className="breathing-room col-6"><p>Use this console to manage topics for student presentations. In the table below, you will see a list of all existing topics. If a topic has been claimed, the student's name will appear in the "Claimed by" column. The table can be sorted alphabetically by topic (by clicking the "Topics" heading) and filtered by category.</p>
+                    
+                    <h4>Resetting data</h4><p>At the start of a new term, you should <span onClick={() => this.resetAll()} className="link">reset or "unclaim" all topics.</span> This will remove the student's name from the topic and allow you to reuse this tool from semester to semester. During the semester, you might find a need to remove a student from a topic (for instance, if they select the wrong one). Simply click the "X" icon next to the student's name to "unclaim" this specific topic.</p>
+                    <h4>Managing topics</h4>
+                       <p>You can <span onClick={() => this.openNewDialogue()} className="link">add a new topic</span> for students to choose. You can also edit or delete existing topics by clicking the appropriate icons in the table below.</p> 
+                    <h4>Managing Term Dates</h4>
+                    <p>Students will see the current term when they use the selection tool. You should {!this.state.termEdit && <span onClick={() => this.setState({ ...this.state, termEdit: true })} className="link">edit term display dates</span>} at the beginning of each new term.</p>
+                       </div>
+                </div>
+
+                <div className="flex-box col-11">
+                    <select onChange={(event) => this.handleTermChange(event, 'filter')} value={this.state.filter}>
                         <option value="">View All</option>
                         {this.state.categories.map((category, i) => {
-                            return(
+                            return (
                                 <option value={category} key={i}>{category}</option>
                             );
                         })}
-                        </select><button className="save-button" onClick={()=>this.applyFilter()}>Apply Filter</button>
-                        
-                    </div>
-    
-                    
+                    </select><button className="save-button" onClick={() => this.applyFilter()}>Apply Filter</button>
+
+                </div>
+
+
                 <div className="container">
                     <table>
                         <thead>
                             <tr>
-                                <td onClick={()=>this.sortData()} className="cancel link">Topic</td>
+                                <td onClick={() => this.sortData()} className="cancel link">Topic</td>
                                 <td>Category</td>
                                 <td>Claimed by</td>
                                 <td>Actions</td>
@@ -353,20 +371,20 @@ class InstructorView extends Component {
                                     <tr key={i}>
                                         <td>{topic.topic}</td>
                                         <td>{topic.category}</td>
-                                <td className="flex-start">{topic.student} {topic.student !== null && 
-                                        <div>{topic.student.length >= 1 && <Clear onClick={()=>this.resetTopic(topic)}/>}</div>}</td>
-                                        <td><Edit onClick={() => this.openDialogue(topic)}/><Delete onClick={() => this.deleteTopic(topic)}/></td>
+                                        <td className="flex-start">{topic.student} {topic.student !== null &&
+                                            <div>{topic.student.length >= 1 && <Clear onClick={() => this.resetTopic(topic)} />}</div>}</td>
+                                        <td><Edit onClick={() => this.openDialogue(topic)} /><Delete onClick={() => this.deleteTopic(topic)} /></td>
                                     </tr>
                                 );
-                            })) : (this.state.filtered.map((topic, i ) => {
+                            })) : (this.state.filtered.map((topic, i) => {
                                 return (
                                     <tr key={i}>
-                                    <td>{topic.topic}</td>
-                                    <td>{topic.category}</td>
-                                    <td className="flex-start">{topic.student} {topic.student !== null && 
-                                        <div>{topic.student.length >= 1 && <Clear onClick={()=>this.resetTopic(topic)}/>}</div>}</td>
-                                    <td><Edit onClick={() => this.openDialogue(topic)}/><Delete onClick={() => this.deleteTopic(topic)}/></td>
-                                </tr>
+                                        <td>{topic.topic}</td>
+                                        <td>{topic.category}</td>
+                                        <td className="flex-start">{topic.student} {topic.student !== null &&
+                                            <div>{topic.student.length >= 1 && <Clear onClick={() => this.resetTopic(topic)} />}</div>}</td>
+                                        <td><Edit onClick={() => this.openDialogue(topic)} /><Delete onClick={() => this.deleteTopic(topic)} /></td>
+                                    </tr>
                                 );
                             }))}
                         </tbody>
@@ -389,7 +407,7 @@ class InstructorView extends Component {
                     <div className="dialog-form">
                         <DialogTitle>Enter topic information</DialogTitle>
                         <label>Topic: </label><Input value={this.state.newTopic} onChange={(event) => this.handleTermChange(event, 'newTopic')} />
-                        <label>Category:</label><select value={this.state.category} onChange={(event)=>this.handleTermChange(event, 'category')}>
+                        <label>Category:</label><select value={this.state.category} onChange={(event) => this.handleTermChange(event, 'category')}>
                             <option value="">---</option>
                             {this.state.categories.map((category, i) => {
                                 return (
@@ -397,7 +415,7 @@ class InstructorView extends Component {
                                 );
                             })}
                         </select>
-                        {this.state.editCategory ? (<p className="cancel link" onClick={() => this.toggleEdit()}>Category not listed?</p>): (<div><p>Create a new category: </p><Input onChange={(event) => this.handleTermChange(event, 'category')} /></div>) }
+                        {this.state.editCategory ? (<p className="cancel link" onClick={() => this.toggleEdit()}>Category not listed?</p>) : (<div><p>Create a new category: </p><Input onChange={(event) => this.handleTermChange(event, 'category')} /></div>)}
                         <div className="flex-box">
                             <p className="cancel" onClick={() => this.closeDialogue()}>Cancel</p>
                             <button onClick={() => this.postTopic()}>Submit</button>

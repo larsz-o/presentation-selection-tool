@@ -58,6 +58,11 @@ button:focus{
   margin-top: 5vh;
   margin-bottom: 2vh;
 }
+.flex-box-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 .flex-start {
   display: flex;
   flex-direction: row;
@@ -68,7 +73,7 @@ button:focus{
   width: 100%;
 }
 h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 300;
 }
 h2 {
@@ -87,6 +92,7 @@ h2 {
 html, body {
   height: 100%;
   background-color: #F5F5F5;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 input {
   border: 0;
@@ -106,7 +112,9 @@ label {
 }
 .link {
   color: rgb(84, 136, 184);
-
+}
+.link:hover {
+  cursor: pointer;
 }
 .lead {
   font-size: 1.25rem;
@@ -131,19 +139,18 @@ label {
 }
 main {
   box-sizing: border-box;
-  font-family: 'Catamaran', sans-serif;
   color: #333333;
   word-wrap: break-word;
   hyphens: auto;
-  background-color: #F5F5F5;
   height: 100%;
 }
 .save-button {
   margin-left: 10px;
   font-size: 1em;
-  background-color: #F5F5F5;
+  background-color: white;
   color: navy;
-  border: 0px  
+  border: 0px;
+  box-shadow: 2px 2px 2px lightgray;
 }
 select {
   font-size: 1.1rem;
@@ -168,7 +175,7 @@ thead {
   margin-top: 0;
   text-transform: uppercase; 
   font-weight: 500;
-  background-color: #BFC3BA
+
 
 }
 .warning {
