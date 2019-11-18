@@ -354,7 +354,7 @@ class InstructorView extends Component {
                                     <tr key={i}>
                                         <td>{topic.topic}</td>
                                         <td>{topic.category}</td>
-                                <td className="flex-evenly">{topic.student} {topic.student !== null && <Clear onClick={()=>this.resetTopic(topic)}/>}</td>
+                                <td className="flex-start">{topic.student} {topic.student !== null && <Clear onClick={()=>this.resetTopic(topic)}/>}</td>
                                         <td><Edit onClick={() => this.openDialogue(topic)}/><Delete onClick={() => this.deleteTopic(topic)}/></td>
                                     </tr>
                                 );
@@ -363,7 +363,7 @@ class InstructorView extends Component {
                                     <tr key={i}>
                                     <td>{topic.topic}</td>
                                     <td>{topic.category}</td>
-                                    <td className="flex-evenly">{topic.student} {topic.student !== null && <Clear onClick={()=>this.resetTopic(topic)}/>}</td>
+                                    <td className="flex-start">{topic.student} {topic.student !== null && <Clear onClick={()=>this.resetTopic(topic)}/>}</td>
                                     <td><Edit onClick={() => this.openDialogue(topic)}/><Delete onClick={() => this.deleteTopic(topic)}/></td>
                                 </tr>
                                 );

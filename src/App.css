@@ -58,10 +58,11 @@ button:focus{
   margin-top: 5vh;
   margin-bottom: 2vh;
 }
-.flex-evenly {
+.flex-start {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  text-align: left;
 }
 .full-width {
   width: 100%;
