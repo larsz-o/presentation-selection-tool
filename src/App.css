@@ -27,7 +27,6 @@ button:focus{
 }
 .confirmation {
   margin-top: 25vh;
-  margin-bottom: 25vh; 
   padding: 2em;
   height: 100%;
   text-align: center;
@@ -43,7 +42,7 @@ button:focus{
   margin-bottom: 10vh;
 }
 .dark {
-background-image: url('./jelly.jpg');
+background-image: url('./soap.jpg');
  background-position: cover;
  background-repeat: no-repeat;
  height: 100%;
