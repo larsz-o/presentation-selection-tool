@@ -26,7 +26,7 @@ button:focus{
   text-align: center;
 }
 .confirmation {
-  margin-top: 25vh;
+  margin-top: 50vh;
   text-align: center;
   font-size: 1.2em;
   background-color: rgba(112, 112, 112, .3);
@@ -45,7 +45,8 @@ button:focus{
 }
 .dark {
   background-image: url('./soap.jpg');
-  height: 100%;
+ background-position: cover;
+ background-repeat: no-repeat;
 }
 .delete-button {
   background-color: #FB3640;
@@ -163,7 +164,7 @@ select {
 }
 table {
   border-collapse: collapse;
-  max-width: 90% !important;
+  width: 90% !important;
   table-layout: fixed;
   background-color: white;
 }
