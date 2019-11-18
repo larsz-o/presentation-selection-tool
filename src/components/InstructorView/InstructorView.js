@@ -3,7 +3,7 @@ import Header from '../Header/Header';
 import axios from 'axios';
 import { Dialog, DialogTitle, Select, MenuItem, Input } from '@material-ui/core';
 import swal from 'sweetalert'; 
-import { Delete, Edit } from '@material-ui/icons'; 
+import { Delete, Edit, Clear } from '@material-ui/icons'; 
 
 let asc = true; 
 class InstructorView extends Component {
@@ -110,6 +110,7 @@ class InstructorView extends Component {
         })
     }
     getLatestData = () => {
+        console.log('getting latest data')
         axios({
             method: 'GET',
             url: 'api/topics/admin'
@@ -213,10 +214,11 @@ class InstructorView extends Component {
                     method: 'PUT',
                     url: `api/topics/reset?id=${topic.id}`
                 }).then((response) => {
-                    this.getLatestData();
+                
                     swal( `${topic.topic} has been unclaimed!`, {
                         icon: "success",
                       });
+                      this.getLatestData();
                 }).catch((error) => {
                     console.log('Error updating topics', error);
                 })
@@ -352,7 +354,7 @@ class InstructorView extends Component {
                                     <tr key={i}>
                                         <td>{topic.topic}</td>
                                         <td>{topic.category}</td>
-                                <td className="flex-evenly">{topic.student} {topic.student !== null && <Delete onClick={()=>this.resetTopic(topic)}/>}</td>
+                                <td className="flex-evenly">{topic.student} {topic.student !== null && <Clear onClick={()=>this.resetTopic(topic)}/>}</td>
                                         <td><Edit onClick={() => this.openDialogue(topic)}/><Delete onClick={() => this.deleteTopic(topic)}/></td>
                                     </tr>
                                 );
@@ -361,6 +363,7 @@ class InstructorView extends Component {
                                     <tr key={i}>
                                     <td>{topic.topic}</td>
                                     <td>{topic.category}</td>
+                                    <td className="flex-evenly">{topic.student} {topic.student !== null && <Clear onClick={()=>this.resetTopic(topic)}/>}</td>
                                     <td><Edit onClick={() => this.openDialogue(topic)}/><Delete onClick={() => this.deleteTopic(topic)}/></td>
                                 </tr>
                                 );
