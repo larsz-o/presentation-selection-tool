@@ -316,7 +316,20 @@ class InstructorView extends Component {
                     <h1>Topics Console</h1>
                 </div>
 
-                {this.state.termEdit && <div className="term-select">
+         
+                <div className="flex-box-center">
+                    <div className="breathing-room col-6"><p>Use this console to manage topics for student presentations. In the table below, you will see a list of all existing topics. If a topic has been claimed, the student's name will appear in the "Claimed by" column. The table can be sorted alphabetically by topic (by clicking the "Topics" heading) and filtered by category.</p>
+                    
+                    <h4>Resetting data</h4><p>At the start of a new term, you should <span onClick={() => this.resetAll()} className="link">reset or "unclaim" all topics.</span> This will remove the student's name from the topic and allow you to reuse this tool from semester to semester. During the semester, you might find a need to remove a student from a topic (for instance, if they select the wrong one). Simply click the "X" icon next to the student's name to "unclaim" this specific topic.</p>
+                    <h4>Managing topics</h4>
+                       <p>You can <span onClick={() => this.openNewDialogue()} className="link">add a new topic</span> for students to choose. You can also edit or delete existing topics by clicking the appropriate icons in the table below.</p> 
+                    <h4>Managing term dates</h4>
+                    <p>Students will see the current term when they use the selection tool. You should  <span onClick={() => this.setState({ ...this.state, termEdit: true })} className="link">edit term display dates</span> at the beginning of each new term.</p>
+                       </div>
+               
+                </div>
+            <div className="flex-box-center">
+            {this.state.termEdit && <div className="term-select">
                     <label>Term:</label>
                     <Select
                         value={this.state.term}
@@ -330,17 +343,7 @@ class InstructorView extends Component {
                     <button className="save-button" onClick={() => this.saveTerm()}>Save</button>
                     <span className="cancel" onClick={() => this.setState({ ...this.state, termEdit: false })}>cancel</span>
                 </div>}
-                <div className="flex-box-center">
-                    <div className="breathing-room col-6"><p>Use this console to manage topics for student presentations. In the table below, you will see a list of all existing topics. If a topic has been claimed, the student's name will appear in the "Claimed by" column. The table can be sorted alphabetically by topic (by clicking the "Topics" heading) and filtered by category.</p>
-                    
-                    <h4>Resetting data</h4><p>At the start of a new term, you should <span onClick={() => this.resetAll()} className="link">reset or "unclaim" all topics.</span> This will remove the student's name from the topic and allow you to reuse this tool from semester to semester. During the semester, you might find a need to remove a student from a topic (for instance, if they select the wrong one). Simply click the "X" icon next to the student's name to "unclaim" this specific topic.</p>
-                    <h4>Managing topics</h4>
-                       <p>You can <span onClick={() => this.openNewDialogue()} className="link">add a new topic</span> for students to choose. You can also edit or delete existing topics by clicking the appropriate icons in the table below.</p> 
-                    <h4>Managing term dates</h4>
-                    <p>Students will see the current term when they use the selection tool. You should {!this.state.termEdit && <span onClick={() => this.setState({ ...this.state, termEdit: true })} className="link">edit term display dates</span>} at the beginning of each new term.</p>
-                       </div>
-                </div>
-
+            </div>
                 <div className="flex-box col-11">
                     <select onChange={(event) => this.handleTermChange(event, 'filter')} value={this.state.filter}>
                         <option value="">View All</option>
