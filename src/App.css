@@ -46,7 +46,7 @@ button:focus{
 background-image: url('./jelly.jpg');
  background-position: cover;
  background-repeat: no-repeat;
- height: 100vh;
+ height: 100%;
 }
 .delete-button {
   background-color: #FB3640;
