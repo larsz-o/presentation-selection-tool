@@ -58,7 +58,7 @@ router.put('/claim', (req, res) => {
 });
 router.put('/reset', (req, res) => {
     const id = req.query.id;
-    const query = `UPDATE "topics" SET "student" = 'null', "email" = 'null', "claimed" = false WHERE "id" = $1;`;
+    const query = `UPDATE "topics" SET "student" = '', "email" = '', "claimed" = false WHERE "id" = $1;`;
     pool.query(query, [id]).then((results) => {
         res.sendStatus(200);
     }).catch((error) => {
@@ -66,7 +66,7 @@ router.put('/reset', (req, res) => {
     })
 })
 router.put('/reset/all', (req, res) => {
-    const query = `UPDATE "topics" SET "student" = 'null', "email" = 'null', "claimed" = false;`;
+    const query = `UPDATE "topics" SET "student" = '', "email" = '', "claimed" = false;`;
     pool.query(query, [id]).then((results) => {
         res.sendStatus(200);
     }).catch((error) => {

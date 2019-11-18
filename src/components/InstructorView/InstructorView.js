@@ -214,11 +214,10 @@ class InstructorView extends Component {
                     method: 'PUT',
                     url: `api/topics/reset?id=${topic.id}`
                 }).then((response) => {
-                
+                    this.getLatestData();
                     swal( `${topic.topic} has been unclaimed!`, {
                         icon: "success",
                       });
-                      this.getLatestData();
                 }).catch((error) => {
                     console.log('Error updating topics', error);
                 })
