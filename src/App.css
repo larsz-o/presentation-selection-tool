@@ -27,6 +27,7 @@ button:focus{
 }
 .confirmation {
   margin-top: 50vh;
+  margin-bottom: 25vh; 
   text-align: center;
   font-size: 1.2em;
   background-color: rgba(10,35,66, .3);
