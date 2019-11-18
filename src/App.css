@@ -47,7 +47,7 @@ button:focus{
 background-image: url('./soap.jpg');
  background-position: cover;
  background-repeat: no-repeat;
- height: 100%;
+ height: 100vh;
 }
 .delete-button {
   background-color: #FB3640;
