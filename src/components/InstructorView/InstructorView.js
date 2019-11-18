@@ -170,6 +170,12 @@ class InstructorView extends Component {
             swal('Uh-oh', 'Your category name can only contain numbers, letters, and underscores and it must be less than 64 characters. Please try again.', 'error'); 
         }
     }
+    resetAll = () => {
+        //when clicked, remove the student claims for all topics 
+    }
+    resetTopic = (topic) => {
+        // when clicked, take this data and remove the student information from it 
+    }
     saveTerm = () => {
         let year = parseInt(this.state.year);
         axios({
@@ -280,6 +286,7 @@ class InstructorView extends Component {
                             <tr>
                                 <td onClick={()=>this.sortData()} className="cancel link">Topic</td>
                                 <td>Category</td>
+                                <td>Claimed by</td>
                                 <td>Actions</td>
                             </tr>
                         </thead>
@@ -290,7 +297,8 @@ class InstructorView extends Component {
                                     <tr key={i}>
                                         <td>{topic.topic}</td>
                                         <td>{topic.category}</td>
-                                        <td><button onClick={() => this.openDialogue(topic)}>Edit</button><button onClick={() => this.deleteTopic(topic)}>Delete</button></td>
+                                        <td>{topic.student} <button className="delete-button">Delete</button></td>
+                                        <td><button onClick={() => this.openDialogue(topic)}>Edit</button><button className="delete-button" onClick={() => this.deleteTopic(topic)}>Delete</button></td>
                                     </tr>
                                 );
                             })) : (this.state.filtered.map((topic, i ) => {

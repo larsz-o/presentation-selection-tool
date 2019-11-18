@@ -26,6 +26,7 @@ if (process.env.DATABASE_URL) {
     database: process.env.DEV_DB, // CHANGE THIS LINE! env var: PGDATABASE, this is likely the one thing you need to change to get up and running
     user: process.env.DEV_USER,
     password: process.env.DEV_PASSWORD,
+    ssl: true,
     max: 10, // max number of clients in the pool
     idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
   };

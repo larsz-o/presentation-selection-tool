@@ -44,6 +44,9 @@ button:focus{
   justify-content: center;
   margin-bottom: 10vh;
 }
+.delete-button {
+  background-color: #FB3640;
+}
 .dialog-form {
   margin: 20px; 
 }
