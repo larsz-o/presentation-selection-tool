@@ -172,9 +172,27 @@ class InstructorView extends Component {
     }
     resetAll = () => {
         //when clicked, remove the student claims for all topics 
+        axios({
+            method: 'PUT',
+            url: `api/topics/reset/all`
+        }).then((response) => {
+            this.getLatestData();
+            console.log('Success!', response)
+        }).catch((error) => {
+            console.log('Error updating topics', error);
+        })
     }
     resetTopic = (topic) => {
         // when clicked, take this data and remove the student information from it 
+        axios({
+            method: 'PUT',
+            url: `api/topics/reset&id=${topic.id}`
+        }).then((response) => {
+            this.getLatestData();
+            console.log('Success!', response)
+        }).catch((error) => {
+            console.log('Error updating topic', error);
+        })
     }
     saveTerm = () => {
         let year = parseInt(this.state.year);
@@ -281,6 +299,7 @@ class InstructorView extends Component {
                         </select><button className="save-button" onClick={()=>this.applyFilter()}>Apply Filter</button>
                     </div>
                 <div className="container">
+                    <button className="delete-button" onClick={()=>this.resetAll()}>Unclaim all topics</button>
                     <table>
                         <thead>
                             <tr>
@@ -297,7 +316,7 @@ class InstructorView extends Component {
                                     <tr key={i}>
                                         <td>{topic.topic}</td>
                                         <td>{topic.category}</td>
-                                        <td>{topic.student} <button className="delete-button">Delete</button></td>
+                                        <td>{topic.student} <button className="delete-button" onClick={()=>this.resetTopic(topic)}>Delete</button></td>
                                         <td><button onClick={() => this.openDialogue(topic)}>Edit</button><button className="delete-button" onClick={() => this.deleteTopic(topic)}>Delete</button></td>
                                     </tr>
                                 );
