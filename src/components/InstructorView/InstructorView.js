@@ -283,8 +283,8 @@ class InstructorView extends Component {
             let topics = this.state.filtered;
             topics.sort(function (a, b) {
                 //descending 
-                let keyA = a.topic;
-                let keyB = b.topic;
+                let keyA = a.topic.toLowerCase();
+                let keyB = b.topic.toLowerCase();
                 // Compare the 2 dates
                 //descending 
                 if (asc === false) {
